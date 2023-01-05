@@ -1,0 +1,60 @@
+﻿
+<div>
+
+
+    <header class="header">
+
+        <a href="#" class="logo"> <i class="fa-solid fa-shop"></i>Shop Savvy </a>
+
+
+
+        <center >
+            <div class="switch" onclick="toggle()" >
+                <input  id="language-toggle" class="check-toggle check-toggle-round-flat" type="checkbox" >
+                <label for="language-toggle"></label>
+                <span class="on" id="eng" >En</span>
+                <span class="off"id="arb">Ar</span>
+            </div>
+        </center>
+
+
+
+
+        <nav class="navbar">
+
+            <div class="English">
+                @Html.ActionLink("Home", "Index", "Home")
+                @Html.ActionLink("login", "Dashboard", "Users")
+
+            </div>
+
+
+
+
+
+            <div class="Arabic">
+                @Html.ActionLink("الصفحه الرئيسيه", "Index", "Home")
+                @Html.ActionLink("تسجيل دخول", "Dashboard", "Users")
+
+            </div>
+
+        </nav>
+
+        <div id="menu-btn" class="fas fa-bars"></div>
+
+    </header>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

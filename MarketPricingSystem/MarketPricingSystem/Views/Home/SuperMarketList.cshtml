@@ -1,0 +1,104 @@
+﻿@model IEnumerable<MarketPricingSystem.Models.supermarket>
+
+@{
+    ViewBag.Title = "SuperMarkets";
+}
+
+<div style="height:100px"> <span></span></div>
+
+
+<div class="English">
+    <table id="supermarket" class="table table-striped table-bordered" style="width:100% ;">
+        <thead>
+            <tr>
+                <th>Market Name</th>
+                <th>Market Region</th>
+                <th>Description</th>
+                <th>phone number</th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var market in Model)
+            {
+
+                <tr>
+                    <td>@market.supermarketName</td>
+                    <td>@market.supermarketRegion</td>
+                    <td>@market.supermarketDescription</td>
+                    <td>@market.phonenumber</td>
+
+
+                    <td>@Html.ActionLink("products", "ProductList", "Home", new { id = market.supermarketId }, new { @class = "btn btn-primary" })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+
+
+<div class="Arabic">
+    <table id="supermarketa" class="table table-striped table-bordered" style="width:100% ;">
+        <thead>
+            <tr>
+                <th>اسم المتجر</th>
+                <th>المنطقه</th>
+                <th>الوصف</th>
+                <th>رقم الهاتف</th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var market in Model)
+            {
+
+                <tr>
+                    <td>@market.supermarketName</td>
+                    <td>@market.supermarketRegion</td>
+                    <td>@market.supermarketDescription</td>
+                    <td>@market.phonenumber</td>
+
+
+                    <td>@Html.ActionLink("البضائع", "ProductList", "Home", new { id = market.supermarketId }, new { @class = "btn btn-primary" })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+<div style="margin-bottom:200px">
+    <span></span>
+</div>
+
+
+@section Styles {
+
+    <link href="~/Content/HomedataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/homedatatables.css" rel="stylesheet" type="text/css" />
+}
+
+@section scripts
+{
+    <script src="~/Scripts/Homejquery-3.5.1.js"></script>
+    <script src="~/Scripts/Homejquery.dataTables.min.js"></script>
+    <script src="~/Scripts/HomedataTables.bootstrap4.min.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#supermarket').DataTable();
+        });
+
+        $(document).ready(function () {
+            $('#supermarketa').DataTable();
+        });
+
+    </script>
+
+
+
+}

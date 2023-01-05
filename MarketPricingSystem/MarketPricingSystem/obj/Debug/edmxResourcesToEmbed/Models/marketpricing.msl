@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="marketpricingContextStoreContainer" CdmEntityContainer="marketpricing">
+    <EntitySetMapping Name="categories">
+      <EntityTypeMapping TypeName="marketpricingContext.category">
+        <MappingFragment StoreEntitySet="categories">
+          <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+          <ScalarProperty Name="categoryName" ColumnName="categoryName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="permissions">
+      <EntityTypeMapping TypeName="marketpricingContext.permission">
+        <MappingFragment StoreEntitySet="permissions">
+          <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
+          <ScalarProperty Name="PermissionName" ColumnName="PermissionName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="productprices">
+      <EntityTypeMapping TypeName="marketpricingContext.productprice">
+        <MappingFragment StoreEntitySet="productprices">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="supermarketid" ColumnName="supermarketid" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="IsActivePrice" ColumnName="IsActivePrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="products">
+      <EntityTypeMapping TypeName="marketpricingContext.product">
+        <MappingFragment StoreEntitySet="products">
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="productName" ColumnName="productName" />
+          <ScalarProperty Name="BarcodeNb" ColumnName="BarcodeNb" />
+          <ScalarProperty Name="productDescription" ColumnName="productDescription" />
+          <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rolepermissions">
+      <EntityTypeMapping TypeName="marketpricingContext.rolepermission">
+        <MappingFragment StoreEntitySet="rolepermissions">
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
+          <ScalarProperty Name="nothing" ColumnName="nothing" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="roles">
+      <EntityTypeMapping TypeName="marketpricingContext.role">
+        <MappingFragment StoreEntitySet="roles">
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="supermarkets">
+      <EntityTypeMapping TypeName="marketpricingContext.supermarket">
+        <MappingFragment StoreEntitySet="supermarket">
+          <ScalarProperty Name="supermarketId" ColumnName="supermarketId" />
+          <ScalarProperty Name="supermarketName" ColumnName="supermarketName" />
+          <ScalarProperty Name="supermarketRegion" ColumnName="supermarketRegion" />
+          <ScalarProperty Name="supermarketDescription" ColumnName="supermarketDescription" />
+          <ScalarProperty Name="phonenumber" ColumnName="phonenumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="marketpricingContext.user">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+          <ScalarProperty Name="gmail" ColumnName="gmail" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="roleid" ColumnName="roleid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="messages">
+      <EntityTypeMapping TypeName="marketpricingContext.message">
+        <MappingFragment StoreEntitySet="messages">
+          <ScalarProperty Name="message1" ColumnName="message" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

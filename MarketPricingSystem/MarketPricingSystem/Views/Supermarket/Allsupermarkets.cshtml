@@ -1,0 +1,273 @@
+﻿@model IEnumerable<MarketPricingSystem.Models.supermarket>
+@{
+    ViewBag.Title = "Allsupermarkets";
+    Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
+}
+
+@{
+
+    var cookie = Request.Cookies["Permissions"];
+
+    MarketPricingSystem.security.EncryptandDecrypt ed = new MarketPricingSystem.security.EncryptandDecrypt();
+    var value = ed.DecryptPassword(cookie.Value);
+
+
+}
+<main class="English">
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Super Markets</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/Users/Dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item active">supermarkets</li>
+        </ol>
+
+        @if (value.Contains("addsupermarket"))
+        {
+            <div style="margin-bottom:10px">
+
+                <a href="/Supermarket/Createsupermarket" class="btn btn-success" role="button">Create New SuperMarket </a>
+            </div>
+        }
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                    All SuperMarkets
+                </div>
+                <div class="card-body">
+                    <table id="datatablesSimple">
+                        <thead>
+                            <tr>
+                                <th>Market Name</th>
+                                <th>Market Region</th>
+                                <th>Description</th>
+                                <th>phone number</th>
+                                @if (value.Contains("updatesupermarket") || value.Contains("deletesupermarket"))
+                                {
+                                    <th></th>
+                                }
+
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Market Name</th>
+                                <th>Market Region</th>
+                                <th>Description</th>
+                                <th>phone number</th>
+                                @if (value.Contains("updatesupermarket") || value.Contains("deletesupermarket"))
+                                {
+                                    <th></th>
+                                }
+
+
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @foreach (var market in Model)
+                            {
+
+                                <tr>
+                                    <td>@market.supermarketName</td>
+                                    <td>@market.supermarketRegion</td>
+                                    <td>@market.supermarketDescription</td>
+                                    <td>@market.phonenumber</td>
+
+                                    @if (value.Contains("updatesupermarket") || value.Contains("deletesupermarket"))
+                                    {
+                                        <td>
+                                            @if (value.Contains("updatesupermarket"))
+                                            {
+                                                <a href="/Supermarket/Updatesupermarket/@market.supermarketId" class="btn btn-primary" role="button">Update</a>
+
+                                            }
+
+                                            @if (value.Contains("deletesupermarket"))
+                                            {
+                                                <button type="button" class="btn btn-danger   js-delete" onclick="confirm(this)" mid-data="@market.supermarketId">
+                                                    Delete
+                                                </button>
+                                            }
+
+
+                                        </td>
+                                    }
+                                    </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+</main>
+
+
+<main class="Arabic">
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">المتاجر</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/Users/Dashboard"> الصفحه الرئيسيه</a></li>
+            <li class="breadcrumb-item active">المتجر</li>
+        </ol>
+
+        @if (value.Contains("addsupermarket"))
+        {
+            <div style="margin-bottom:10px">
+
+                <a href="/Supermarket/Createsupermarket" class="btn btn-success" role="button">اضافه متجر جديد </a>
+            </div>
+        }
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+               جميع المتاجر
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimplea">
+                    <thead>
+                        <tr>
+                            <th>اسم المتجر</th>
+                            <th>المنطقه</th>
+                            <th>الوصف</th>
+                            <th>رقم الهاتف</th>
+                            @if (value.Contains("updatesupermarket") || value.Contains("deletesupermarket"))
+                            {
+                                <th></th>
+                            }
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>اسم المتجر</th>
+                            <th>المنطقه</th>
+                            <th>الوصف</th>
+                            <th>رقم الهاتف</th>
+                            @if (value.Contains("updatesupermarket") || value.Contains("deletesupermarket"))
+                            {
+                                <th></th>
+                            }
+
+
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var market in Model)
+                        {
+
+                            <tr>
+                                <td>@market.supermarketName</td>
+                                <td>@market.supermarketRegion</td>
+                                <td>@market.supermarketDescription</td>
+                                <td>@market.phonenumber</td>
+
+                                @if (value.Contains("updatesupermarket") || value.Contains("deletesupermarket"))
+                                {
+                                    <td>
+                                        @if (value.Contains("updatesupermarket"))
+                                        {
+                                            <a href="/Supermarket/Updatesupermarket/@market.supermarketId" class="btn btn-primary" role="button">تعديل</a>
+
+                                        }
+
+                                        @if (value.Contains("deletesupermarket"))
+                                        {
+                                            <button type="button" class="btn btn-danger   js-delete" onclick="confirm(this)" mid-data="@market.supermarketId">
+                                                ازاله
+                                            </button>
+                                        }
+
+
+                                    </td>
+                                }
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section scripts {
+
+    <script src="~/Scripts/sweetalert2@11.js"></script>
+
+    <script>
+        function confirm(event) {
+            var btn = event;
+            let value = btn.getAttribute("mid-data");
+            let lang = localStorage.getItem("lang");
+            if (lang == "English") {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "/Supermarket/ConfirmDelete/" + value,
+                            method: "get",
+                            success: function () {
+                                $(btn).closest('tr').fadeOut();
+                            }
+                        })
+
+
+
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                    }
+                })
+            }
+
+
+            if (lang == "Arabic") {
+                Swal.fire({
+                    title: 'هل انت متاكد?',
+                    text: "!لن تتمكن من استرجاع البينات",
+                    icon: 'warning',
+                   
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '!نعم انا متاكد',
+                    cancelButtonText: "الغاء",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "/Supermarket/ConfirmDelete/" + value,
+                            method: "get",
+                            success: function () {
+                                $(btn).closest('tr').fadeOut();
+                            }
+                        })
+
+
+
+                        Swal.fire(
+                            'تم!',
+                            'تم ازاله هذه المعلومات',
+                            'success'
+                        )
+                    }
+                })
+            }
+        }
+            
+          
+
+
+    </script>
+
+}

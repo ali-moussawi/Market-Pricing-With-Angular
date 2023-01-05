@@ -1,0 +1,254 @@
+﻿@model List<int>
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
+}
+
+
+<div class="English">
+<div class="container-fluid px-4">
+    <h1 class=" mt-4">Dashboard</h1>
+  
+    <ol class="breadcrumb mb-4">
+        <li class="  breadcrumb-item active">Dashboard</li>
+       
+    </ol>
+</div>
+
+</div>
+<div class="Arabic">
+    <div class="container-fluid px-4">
+
+        <h1 class=" mt-4">الصفحه الرئيسيه</h1>
+        <ol class="breadcrumb mb-4">
+         
+            <li class="  breadcrumb-item active">الصفحه الرئيسيه</li>
+        </ol>
+    </div>
+
+
+
+
+</div>
+
+
+
+
+<div class="English">
+    <div class="row">
+        <div class="col-md-4 col-xl-4">
+            <div class="card bg-c-blue order-card">
+                <div class="card-block">
+                    <h6 class="m-b-20">Super Markets</h6>
+
+                    <h2 class="text-right"><i class="fa-solid fa-shop" style="margin-right:10px"></i><span>@Model.ElementAt(0)</span></h2>
+                    <p class="m-b-0"> <span class="f-right"></span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-xl-4">
+            <div class="card bg-c-green order-card">
+                <div class="card-block">
+                    <h6 class=" m-b-20">Products</h6>
+
+                    <h2 class="text-right"><i class="fa-solid fa-cart-shopping" style="margin-right:10px"></i><span>@Model.ElementAt(1)</span></h2>
+                    <p class="m-b-0"> <span class="f-right"></span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-xl-4">
+            <div class="card bg-c-yellow order-card">
+                <div class="card-block">
+                    <h6 class="m-b-20">Categories</h6>
+
+                    <h2 class="text-right"><i class="fa-solid fa-magnifying-glass" style="margin-right:10px"></i><span>@Model.ElementAt(2)</span></h2>
+                    <p class="m-b-0"><span class="f-right"></span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-xl-4">
+            <div class="card bg-c-pink order-card">
+                <div class="card-block">
+                    <h6 class="m-b-20">Users</h6>
+
+                    <h2 class="text-right"> <i class="fa-solid fa-users"></i> <span> @Model.ElementAt(3)</span></h2>
+                    <p class="m-b-0"> <span class="f-right"></span></p>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-12  col-xl-8 bg-black " style=" opacity:0.9;box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;border-radius:5px">
+            <div class="card order-card bg-black ">
+                <div class="card-block">
+                    <h6 class="m-b-20">Track</h6>
+
+                    <h2 class="text-right">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <a class="btn bg-gradient" style="width:fit-content" href="/Track/Allsupermarkets" id="trackbtn">Visualize product price</a>
+
+
+                    </h2>
+                    <p class="m-b-0"> <span class="f-right"></span></p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>
+
+
+<div class = "Arabic">
+    <div class=" row">
+        <div class="col-md-4 col-xl-4">
+            <div class="card bg-c-blue order-card">
+                <div class="card-block">
+
+                    <h6 class="m-b-20">المتجر</h6>
+                    <h2 class="text-right"><i class="fa-solid fa-shop" style="margin-right:10px"></i><span>@Model.ElementAt(0)</span></h2>
+                    <p class="m-b-0"> <span class="f-right"></span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-xl-4">
+            <div class="card bg-c-green order-card">
+                <div class="card-block">
+
+                    <h6 class="m-b-20">البضائع</h6>
+                    <h2 class="text-right"><i class="fa-solid fa-cart-shopping" style="margin-right:10px"></i><span>@Model.ElementAt(1)</span></h2>
+                    <p class="m-b-0"> <span class="f-right"></span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-xl-4">
+            <div class="card bg-c-yellow order-card">
+                <div class="card-block">
+
+                    <h6 class="m-b-20">الاصناف</h6>
+                    <h2 class="text-right"><i class="fa-solid fa-magnifying-glass" style="margin-right:10px"></i><span>@Model.ElementAt(2)</span></h2>
+                    <p class="m-b-0"><span class="f-right"></span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-xl-4">
+            <div class="card bg-c-pink order-card">
+                <div class="card-block">
+
+                    <h6 class="m-b-20">المستخدمين</h6>
+                    <h2 class="text-right"> <i class="fa-solid fa-users"></i> <span> @Model.ElementAt(3)</span></h2>
+                    <p class="m-b-0"> <span class="f-right"></span></p>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-12  col-xl-8 bg-black " style=" opacity:0.9;box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;border-radius:5px">
+            <div class="card order-card bg-black ">
+                <div class="card-block">
+
+                    <h6 class="m-b-20">مسار الاسعار</h6>
+                    <h2 class="text-right">
+                        <i class="fa-solid fa-chart-line"></i>
+
+                        <a class="btn bg-gradient" style="width:fit-content" href="/Track/Allsupermarkets" id="trackbtn">تصور سعر المنتج</a>
+
+                    </h2>
+                    <p class="m-b-0"> <span class="f-right"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@section Styles {
+
+    <style>
+
+
+
+        #trackbtn {
+            color: white;
+            margin-left: 10px
+        }
+
+            #trackbtn:hover {
+                color: black;
+                background-color: white
+            }
+
+
+        body {
+            margin-top: 7px;
+            background: #FAFAFA;
+            padding: 20px;
+        }
+
+        .order-card {
+            color: #fff;
+        }
+
+        .bg-c-blue {
+            background: linear-gradient(45deg,#4099ff,#73b4ff);
+        }
+
+        .bg-c-green {
+            background: linear-gradient(45deg,#2ed8b6,#59e0c5);
+        }
+
+        .bg-c-yellow {
+            background: linear-gradient(45deg,#FFB64D,#ffcb80);
+        }
+
+        .bg-c-pink {
+            background: linear-gradient(45deg,#FF5370,#ff869a);
+        }
+
+
+        .card {
+            border-radius: 5px;
+            -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+            box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+            border: none;
+            margin-bottom: 30px;
+            -webkit-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+
+            .card .card-block {
+                padding: 25px;
+            }
+
+        .order-card i {
+            font-size: 26px;
+        }
+
+        .f-left {
+            float: left;
+        }
+
+        .f-right {
+            float: right;
+        }
+    </style>
+
+
+}
+
+
+
+
+
+

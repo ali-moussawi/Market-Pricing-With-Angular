@@ -1,0 +1,408 @@
+﻿@model  MarketPricingSystem.ViewModel.roleandpermissionsandcheckedone
+
+
+@{
+    ViewBag.Title = "Createsupermarket";
+    Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
+}
+
+
+<main class="English">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Update Role</h3></div>
+                    <div class="card-body">
+
+
+
+                        <input type="hidden" value="@Model.role.RoleId" id="roleid" name="roleid" />
+
+                        <h6 style="color:red;opacity:0.5;display:none" id="pleaseinsert">Please insert role name</h6>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3 mb-md-0">
+                                    <input class="form-control" id="Rolename" type="text" name="Rolename" onclick="hide()" value="@Model.role.RoleName" required />
+                                    <label for="Rolename"> Role Name</label>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+
+                        <div class="row mb-3">
+
+
+                            @foreach (var permission in Model.permissions)
+                            {
+                                var flag = true;
+                                <div class="col-md-6">
+
+                                    @foreach (var checkedperm in Model.checkedpermissionsid)
+                                    {
+
+
+
+                                        if (permission.PermissionId == checkedperm.PermissionId)
+                                        {
+                                            <input style=" cursor: pointer;" class="form-check-input checkk" type="checkbox" id="@permission.PermissionName" name="@permission.PermissionName" checked value="@permission.PermissionId">
+
+                                            <label style=" cursor: pointer;" for="@permission.PermissionName"> @permission.PermissionName</label><br>
+
+                                            flag = false;
+
+                                        }
+
+
+                                    }
+
+                                    @if (flag == true)
+                                    {
+                                        <input style=" cursor: pointer;" class="form-check-input checkk" type="checkbox" id="@permission.PermissionName" name="@permission.PermissionName" value="@permission.PermissionId">
+
+                                        <label style=" cursor: pointer;" for="@permission.PermissionName"> @permission.PermissionName</label><br>
+
+                                    }
+
+
+
+                                </div>
+
+
+                            }
+
+
+
+
+
+
+
+                        </div>
+
+                        <div class="mt-4 mb-0">
+                            <div class="d-grid"> <button type="submit" id="btne" class="btn btn-primary"> update</button> </div>
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+
+<main class="Arabic">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h3 class="text-center font-weight-light my-4">تعديل الدور</h3></div>
+                    <div class="card-body">
+
+
+
+                        <input type="hidden" value="@Model.role.RoleId" id="roleid" name="roleid" />
+
+                        <h6 style="color:red;opacity:0.5;display:none" id="pleaseinserta">ادخل اسم للدور رجاءا</h6>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3 mb-md-0">
+                                    <input class="form-control" id="Rolenamea" type="text" name="Rolename" onclick="hidea()" value="@Model.role.RoleName" required />
+                                    <label for="Rolename">اسم الدور</label>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+
+                        <div class="row mb-3">
+
+
+                            @foreach (var permission in Model.permissions)
+                            {
+                                var flag = true;
+                                <div class="col-md-6">
+
+                                    @foreach (var checkedperm in Model.checkedpermissionsid)
+                                    {
+
+
+
+                                        if (permission.PermissionId == checkedperm.PermissionId)
+                                        {
+                                            <input style=" cursor: pointer;" class="form-check-input checka" type="checkbox" id="@permission.PermissionName" name="@permission.PermissionName" checked value="@permission.PermissionId">
+
+                                            <label style=" cursor: pointer;" for="@permission.PermissionName"> @permission.PermissionName</label><br>
+
+                                            flag = false;
+
+                                        }
+
+
+                                    }
+
+                                    @if (flag == true)
+                                    {
+                                        <input style=" cursor: pointer;" class="form-check-input checka" type="checkbox" id="@permission.PermissionName" name="@permission.PermissionName" value="@permission.PermissionId">
+
+                                        <label style=" cursor: pointer;" for="@permission.PermissionName"> @permission.PermissionName</label><br>
+
+                                    }
+
+
+
+                                </div>
+
+
+                            }
+
+
+
+
+
+
+
+                        </div>
+
+                        <div class="mt-4 mb-0">
+                            <div class="d-grid"> <button type="submit" id="btna" class="btn btn-primary"> تعديل</button> </div>
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+@section scripts{
+
+    <script src="~/Scripts/sweetalert2@11.js"></script>
+    <script>
+
+
+
+
+        function hide() {
+
+            var pleaseinsert = document.getElementById('pleaseinsert');
+            pleaseinsert.style.display = "none";
+
+        }
+
+
+
+
+
+
+        $('#btne').click(function () {
+
+
+
+            var rolename = document.getElementById('Rolename').value;
+
+            if (rolename == "") {
+
+                var pleaseinsert = document.getElementById('pleaseinsert');
+                pleaseinsert.style.display = "block";
+
+            }
+            else {
+
+                var roleid = document.getElementById("roleid").value;
+                var data = rolename + "," + roleid + ",";
+
+                var allcheckbox = document.getElementsByClassName("checkk");
+
+
+                for (var checkedone of allcheckbox) {
+
+                    if (checkedone.checked) {
+
+                        data += checkedone.value + ",";
+                    }
+
+
+                }
+                data = data.substring(0, data.length - 1);
+
+
+
+                $.ajax
+                    ({
+                        type: 'POST',
+                        dataType: 'JSON',
+                        url: '/Roles/Confirmupdate',
+                        data: { Data: data },
+                        //here if request is successfully send then its success but we want to see the response after a successful request
+                        success: function (response) {
+                            if (response.success) {
+                                
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: response.responseText,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                    
+                                })
+
+                                if (response.isRedirect) {
+                                    window.location.href = response.redirecturl;
+                                }
+
+
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: response.responseText,
+
+                                })
+                            }
+                        },
+                        error: function () {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops something wrong...',
+                                text: 'Please go back to role list page and try agian',
+
+                            })
+                        }
+
+                    })
+            }
+
+
+
+        })
+
+
+       //arabic////
+
+        function hidea() {
+
+            var pleaseinsert = document.getElementById('pleaseinserta');
+            pleaseinsert.style.display = "none";
+
+        }
+
+
+
+
+
+
+        $('#btna').click(function () {
+
+
+
+            var rolename = document.getElementById('Rolenamea').value;
+
+            if (rolename == "") {
+
+                var pleaseinsert = document.getElementById('pleaseinserta');
+                pleaseinsert.style.display = "block";
+
+            }
+            else {
+
+                var roleid = document.getElementById("roleid").value;
+                var data = rolename + "," + roleid + ",";
+
+                var allcheckbox = document.getElementsByClassName("checka");
+
+
+                for (var checkedone of allcheckbox) {
+
+                    if (checkedone.checked) {
+
+                        data += checkedone.value + ",";
+                    }
+
+
+                }
+                data = data.substring(0, data.length - 1);
+
+
+
+                $.ajax
+                    ({
+                        type: 'POST',
+                        dataType: 'JSON',
+                        url: '/Roles/Confirmupdate',
+                        data: { Data: data },
+                        //here if request is successfully send then its success but we want to see the response after a successful request
+                        success: function (response) {
+                            if (response.success) {
+
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: response.responseText,
+                                    showConfirmButton: false,
+                                    timer: 1000
+                                })
+                                if (response.isRedirect) {
+                                    window.location.href = response.redirecturl;
+                                }
+
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: response.responseText,
+
+                                })
+                            }
+                        },
+                        error: function () {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops something wrong...',
+                                text: 'Please go back to role list page and try agian',
+
+                            })
+                        }
+
+                    })
+            }
+
+
+
+        })
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+}

@@ -1,0 +1,314 @@
+﻿@model  IEnumerable<MarketPricingSystem.Models.role>
+@{
+    ViewBag.Title = "Create User";
+    Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
+}
+
+
+<main class="English">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Add new User</h3></div>
+                    <div class="card-body">
+
+
+                        <form method="post" action="/Others/Confirmcreate">
+                            <h6 style="color:red;opacity:0.5;margin-left:53%">@TempData["Message1"]  </h6>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3 mb-md-0">
+                                        <input class="form-control" id="username" type="text" name="username" required />
+                                        <label for="username"> User Name</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input class="form-control" id="phonenumber" type="text" name="phonenumber" required pattern="[0-9]+"  oninvalid="this.setCustomValidity('Please just enter numbers')"oninput="this.setCustomValidity('')" />
+                                        <label for="phonenumber"> User phonenumber</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 style="color:red;opacity:0.5;">@TempData["Message2"]  </h6>
+                            <div class="form-floating mb-3">
+                                <input class="form-control" type="email" id="gmail" name="gmail" required />
+                                <label for="gmail"> User gmail</label>
+                            </div>
+
+
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3 mb-md-0">
+                                        <input class="form-control" id="password" type="password" name="password" onclick="able()" required />
+                                        <label for="password">password</label>
+                                    </div>
+                                    <span id="c1" style="color:red">Password does not match !</span>
+                                </div>
+
+
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3 mb-md-0">
+                                        <input class="form-control" id="confirmpassword" onclick="able()" type="password" required />
+                                        <label for="confirmpassword">Confirm password</label>
+
+                                    </div>
+                                    <span id="c2" style="color:red">Password does not match !</span>
+                                </div>
+
+                            </div>
+                            <h6 style="color:red;opacity:0.5;">@TempData["Message3"]  </h6>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="role" style="opacity: 0.5">Role</label>
+
+                                        <select id="role" class="form-control" name="roleid" required>
+                                            <option disabled selected>--select--</option>
+                                            @foreach (var role in Model)
+                                            {
+                                                <option value="@role.RoleId">@role.RoleName</option>
+                                            }
+
+
+
+
+                                        </select>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="mt-4 mb-0">
+                                <div class="d-grid"> <button id="btn" type="submit" class="btn btn-primary" onclick="validate()"> Add</button> </div>
+                            </div>
+                        </form>
+
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+
+
+
+
+<main class="Arabic">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h3 class="text-center font-weight-light my-4">اضافه مستخدم جديد</h3></div>
+                    <div class="card-body">
+
+
+                        <form method="post" action="/Others/Confirmcreate">
+                            <h6 style="color:red;opacity:0.5;margin-left:53%">@TempData["Message1"]  </h6>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3 mb-md-0">
+                                        <input class="form-control" id="username" type="text" name="username" required />
+                                        <label for="username">اسم المستخدم</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input class="form-control" id="phonenumber" type="text" name="phonenumber" required  pattern="[0-9]+"  oninvalid="this.setCustomValidity('ادخل ارقام فقط')"oninput="this.setCustomValidity('')"/>
+                                        <label for="phonenumber">رقم الهاتف</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 style="color:red;opacity:0.5;">@TempData["Message2"]  </h6>
+                            <div class="form-floating mb-3">
+                                <input class="form-control" type="email" id="gmail" name="gmail" required />
+                                <label for="gmail">البريد الالكتروني</label>
+                            </div>
+
+
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3 mb-md-0">
+                                        <input class="form-control" id="passworda" type="password" name="password" onclick="ablea()" required />
+                                        <label for="password">الرمز</label>
+                                    </div>
+                                    <span id="c1a" style="color:red">الرمز غير مطابق</span>
+                                </div>
+
+
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3 mb-md-0">
+                                        <input class="form-control" id="confirmpassworda" onclick="ablea()" type="password" required />
+                                        <label for="confirmpassword">تاكيد الرمز</label>
+
+                                    </div>
+                                    <span id="c2a" style="color:red">الرمز غير مطابق</span>
+                                </div>
+
+                            </div>
+                            <h6 style="color:red;opacity:0.5;">@TempData["Message3"]  </h6>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="role" style="opacity: 0.5">الدور</label>
+
+                                        <select id="role" class="form-control" name="roleid" required>
+                                            <option disabled selected>--تحديد--</option>
+                                            @foreach (var role in Model)
+                                            {
+                                                <option value="@role.RoleId">@role.RoleName</option>
+                                            }
+
+
+
+
+                                        </select>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="mt-4 mb-0">
+                                <div class="d-grid"> <button id="btna" type="submit" class="btn btn-primary" onclick="validatea()"> اضافه</button> </div>
+                            </div>
+                        </form>
+
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section scripts
+    {
+    
+    <script>
+        const c11 = document.getElementById("c1");
+        const c22 = document.getElementById("c2");
+        c11.style.display = "none";
+        c22.style.display = "none";
+
+
+        const c11a = document.getElementById("c1a");
+        const c22a = document.getElementById("c2a");
+        c11a.style.display = "none";
+        c22a.style.display = "none";
+     
+
+        function validate() {
+            var password = document.getElementById("password").value;
+            var confirmpassword = document.getElementById("confirmpassword").value;
+
+            const button = document.getElementById("btn");
+
+
+            const c1 = document.getElementById("c1");
+            const c2 = document.getElementById("c2");
+
+
+
+
+
+
+
+            var v = password === confirmpassword;
+            if (!v) {
+
+                c1.style.display = "block";
+                c2.style.display = "block";
+            }
+            button.disabled = !v;
+        }
+
+
+
+
+
+
+        function able() {
+            const c11 = document.getElementById("c1");
+            const c22 = document.getElementById("c2");
+            c11.style.display = "none";
+            c22.style.display = "none";
+            const button = document.getElementById("btn");
+            button.disabled = false;
+
+        }
+
+
+
+
+        function validatea() {
+            var password = document.getElementById("passworda").value;
+            var confirmpassword = document.getElementById("confirmpassworda").value;
+
+            const button = document.getElementById("btna");
+
+
+            const c1 = document.getElementById("c1a");
+            const c2 = document.getElementById("c2a");
+
+
+
+
+
+
+
+            var v = password === confirmpassword;
+            if (!v) {
+
+                c1.style.display = "block";
+                c2.style.display = "block";
+            }
+            button.disabled = !v;
+        }
+
+
+
+
+
+
+        function ablea() {
+            const c11 = document.getElementById("c1a");
+            const c22 = document.getElementById("c2a");
+            c11.style.display = "none";
+            c22.style.display = "none";
+            const button = document.getElementById("btna");
+            button.disabled = false;
+
+        }
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+}

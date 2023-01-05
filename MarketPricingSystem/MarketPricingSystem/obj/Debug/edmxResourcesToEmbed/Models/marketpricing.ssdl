@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="marketpricingContext.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="messages">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="message" Type="nvarchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="categories">
+    <Key>
+      <PropertyRef Name="categoryId" />
+    </Key>
+    <Property Name="categoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="categoryName" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="permissions">
+    <Key>
+      <PropertyRef Name="PermissionId" />
+    </Key>
+    <Property Name="PermissionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PermissionName" Type="nvarchar" MaxLength="45" Nullable="false" />
+  </EntityType>
+  <EntityType Name="productprices">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="productId" Type="int" Nullable="false" />
+    <Property Name="supermarketid" Type="int" Nullable="false" />
+    <Property Name="price" Type="int" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="IsActivePrice" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="products">
+    <Key>
+      <PropertyRef Name="productId" />
+    </Key>
+    <Property Name="productId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="productName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="BarcodeNb" Type="int" Nullable="false" />
+    <Property Name="productDescription" Type="nvarchar" MaxLength="255" />
+    <Property Name="categoryId" Type="int" />
+  </EntityType>
+  <EntityType Name="rolepermissions">
+    <Key>
+      <PropertyRef Name="RoleId" />
+      <PropertyRef Name="PermissionId" />
+    </Key>
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="PermissionId" Type="int" Nullable="false" />
+    <Property Name="nothing" Type="nchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="supermarket">
+    <Key>
+      <PropertyRef Name="supermarketId" />
+    </Key>
+    <Property Name="supermarketId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="supermarketName" Type="nvarchar" MaxLength="45" Nullable="false" />
+    <Property Name="supermarketRegion" Type="nvarchar" MaxLength="45" Nullable="false" />
+    <Property Name="supermarketDescription" Type="nvarchar" MaxLength="255" />
+    <Property Name="phonenumber" Type="nvarchar" MaxLength="45" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="55" Nullable="false" />
+    <Property Name="phoneNumber" Type="nvarchar" MaxLength="45" />
+    <Property Name="gmail" Type="nvarchar" MaxLength="55" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="55" Nullable="false" />
+    <Property Name="roleid" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="productprices$prid">
+    <End Role="products" Type="Self.products" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="productprices" Type="Self.productprices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="products">
+        <PropertyRef Name="productId" />
+      </Principal>
+      <Dependent Role="productprices">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="productprices$spid">
+    <End Role="supermarket" Type="Self.supermarket" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="productprices" Type="Self.productprices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="supermarket">
+        <PropertyRef Name="supermarketId" />
+      </Principal>
+      <Dependent Role="productprices">
+        <PropertyRef Name="supermarketid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="products$ctgr">
+    <End Role="categories" Type="Self.categories" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="products" Type="Self.products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categories">
+        <PropertyRef Name="categoryId" />
+      </Principal>
+      <Dependent Role="products">
+        <PropertyRef Name="categoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="rolepermissions$forg1">
+    <End Role="roles" Type="Self.roles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="rolepermissions" Type="Self.rolepermissions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="roles">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="rolepermissions">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="rolepermissions$forg2">
+    <End Role="permissions" Type="Self.permissions" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="rolepermissions" Type="Self.rolepermissions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="permissions">
+        <PropertyRef Name="PermissionId" />
+      </Principal>
+      <Dependent Role="rolepermissions">
+        <PropertyRef Name="PermissionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="users$frg123roleid">
+    <End Role="roles" Type="Self.roles" Multiplicity="1" />
+    <End Role="users" Type="Self.users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="roles">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="users">
+        <PropertyRef Name="roleid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="marketpricingContextStoreContainer">
+    <EntitySet Name="messages" EntityType="Self.messages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="categories" EntityType="Self.categories" Schema="marketpricing" store:Type="Tables" />
+    <EntitySet Name="permissions" EntityType="Self.permissions" Schema="marketpricing" store:Type="Tables" />
+    <EntitySet Name="productprices" EntityType="Self.productprices" Schema="marketpricing" store:Type="Tables" />
+    <EntitySet Name="products" EntityType="Self.products" Schema="marketpricing" store:Type="Tables" />
+    <EntitySet Name="rolepermissions" EntityType="Self.rolepermissions" Schema="marketpricing" store:Type="Tables" />
+    <EntitySet Name="roles" EntityType="Self.roles" Schema="marketpricing" store:Type="Tables" />
+    <EntitySet Name="supermarket" EntityType="Self.supermarket" Schema="marketpricing" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="marketpricing" store:Type="Tables" />
+    <AssociationSet Name="productprices$prid" Association="Self.productprices$prid">
+      <End Role="products" EntitySet="products" />
+      <End Role="productprices" EntitySet="productprices" />
+    </AssociationSet>
+    <AssociationSet Name="productprices$spid" Association="Self.productprices$spid">
+      <End Role="supermarket" EntitySet="supermarket" />
+      <End Role="productprices" EntitySet="productprices" />
+    </AssociationSet>
+    <AssociationSet Name="products$ctgr" Association="Self.products$ctgr">
+      <End Role="categories" EntitySet="categories" />
+      <End Role="products" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="rolepermissions$forg1" Association="Self.rolepermissions$forg1">
+      <End Role="roles" EntitySet="roles" />
+      <End Role="rolepermissions" EntitySet="rolepermissions" />
+    </AssociationSet>
+    <AssociationSet Name="rolepermissions$forg2" Association="Self.rolepermissions$forg2">
+      <End Role="permissions" EntitySet="permissions" />
+      <End Role="rolepermissions" EntitySet="rolepermissions" />
+    </AssociationSet>
+    <AssociationSet Name="users$frg123roleid" Association="Self.users$frg123roleid">
+      <End Role="roles" EntitySet="roles" />
+      <End Role="users" EntitySet="users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

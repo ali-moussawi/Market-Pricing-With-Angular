@@ -1,0 +1,249 @@
+﻿@model MarketPricingSystem.Models.user
+@{
+    ViewBag.Title = "Settings";
+    Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
+}
+
+
+
+<form method="post" action="/Users/Updatesettings">
+
+    <div class="English wrapper bg-white mt-sm-5">
+        <div class="English">
+            <h4 class="pb-5 border-bottom">Account settings</h4>
+
+            <div class="py-5">
+
+
+
+                <div class="row py-2">
+                    <h6 style="color:red;opacity:0.5;margin-left:50%">@TempData["Message1"]  </h6>
+                    <div class="col-md-6">
+                        <label for="name">Name</label>
+                        <input type="text" class="bg-light form-control" id="name" value="@Model.Name" name="name" required>
+                    </div>
+
+
+                    <div class="col-md-6 pt-md-0 pt-3">
+
+                        <label for="phone">Phone number</label>
+                        <input type="text" id="phone" class="bg-light form-control" value="@Model.phoneNumber" name="phone" required pattern="[0-9]+" oninvalid="this.setCustomValidity('Please just enter numbers')" oninput="this.setCustomValidity('')">
+                    </div>
+                </div>
+
+
+
+                <div class="row py-2">
+                    <div class="col-md-11">
+                        <label for="email">Email Address</label>
+                        <input type="text" id="email" class="bg-opacity-75 form-control" placeholder="@Model.gmail" readonly value="@Model.gmail">
+                    </div>
+                </div>
+
+
+                <div class="row py-2">
+                    <div class="col-md-6 pt-md-0 pt-3">
+                        <label for="password">Change password</label>
+                        <input type="password" id="password" class="bg-light form-control" onclick="able()" name="newpassword" onchange="able()">
+                        <span id="c1" style="color:red">Password does not match !</span>
+                    </div>
+
+
+                    <div class="col-md-6 pt-md-0 pt-3">
+                        <label for="confirmpassword">Confirm new password</label>
+                        <input type="password" id="confirmpassword" class="bg-light form-control" onclick="able()" onchange="able()">
+                        <span id="c2" style="color:red">Password does not match !</span>
+                    </div>
+
+
+                </div>
+
+
+
+                <input type="hidden" value="@Model.UserId" name="userid" />
+
+                <div class="py-3 pb-4 border-bottom">
+                    <button id="btn" class="btn btn-primary mr-3" onclick="validate()" type="submit">update new settings</button>
+                    <a class="btn btn-success" href="/Users/Dashboard"> Back </a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    </form>
+    <form method="post" action="/Users/Updatesettings">
+        <div class=" wrapper bg-white mt-sm-5">
+            <div class="Arabic">
+                <h4 class="pb-5 border-bottom">اعدادات الحساب</h4>
+
+                <div class="py-5">
+
+
+
+                    <div class="row py-2">
+                        <h6 style="color:red;opacity:0.5;margin-left:50%">@TempData["Message1"]  </h6>
+                        <div class="col-md-6">
+                            <label for="name">الاسم</label>
+                            <input type="text" class="bg-light form-control" id="name" value="@Model.Name" name="name" required>
+                        </div>
+
+
+                        <div class="col-md-6 pt-md-0 pt-3">
+
+                            <label for="phone">رقم الهاتف</label>
+                            <input type="text" id="phone" class="bg-light form-control" value="@Model.phoneNumber" name="phone" required pattern="[0-9]+" oninvalid="this.setCustomValidity('ادخل ارقام فقط')" oninput="this.setCustomValidity('')">
+                        </div>
+                    </div>
+
+
+
+                    <div class="row py-2">
+                        <div class="col-md-11">
+                            <label for="email">البريد الالكتروني</label>
+                            <input type="text" id="email" class="bg-opacity-75 form-control" placeholder="@Model.gmail" readonly value="@Model.gmail">
+                        </div>
+                    </div>
+
+
+                    <div class="row py-2">
+                        <div class="col-md-6 pt-md-0 pt-3">
+                            <label for="password">تغيير الرمز</label>
+                            <input type="password" id="passworda" class="bg-light form-control" onclick="ablea()" name="newpassword" onchange="ablea()">
+                            <span id="c1a" style="color:red">الرمز غير مطابق</span>
+                        </div>
+
+
+                        <div class="col-md-6 pt-md-0 pt-3">
+                            <label for="confirmpassword">تاكيد الرمز الجديد</label>
+                            <input type="password" id="confirmpassworda" class="bg-light form-control" onclick="ablea()" onchange="ablea()">
+                            <span id="c2a" style="color:red">الرمز غير مطابق</span>
+                        </div>
+
+
+                    </div>
+
+
+
+                    <input type="hidden" value="@Model.UserId" name="userid" />
+
+                    <div class="py-3 pb-4 border-bottom">
+                        <button id="btna" class="btn btn-primary mr-3" onclick="validatea()" type="submit">حفظ الاعدادات الجديده</button>
+                        <a class="btn btn-success" href="/Users/Dashboard"> الرجوع </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+
+    @section Styles{
+
+        <link rel="stylesheet" href="~/Content/Settings.css" />
+
+    }
+
+
+
+
+    @section scripts
+    {
+
+        <script>
+            const c11 = document.getElementById("c1");
+            const c22 = document.getElementById("c2");
+            c1.style.display = "none";
+            c2.style.display = "none";
+            const c11a = document.getElementById("c1a");
+            const c22a = document.getElementById("c2a");
+            c1a.style.display = "none";
+            c2a.style.display = "none";
+
+
+            function validate() {
+                var password = document.getElementById("password").value;
+                var confirmpassword = document.getElementById("confirmpassword").value;
+
+                const button = document.getElementById("btn");
+
+
+                const c1 = document.getElementById("c1");
+                const c2 = document.getElementById("c2");
+
+
+
+
+
+
+
+                var v = password === confirmpassword;
+                if (!v) {
+
+                    c1.style.display = "block";
+                    c2.style.display = "block";
+                }
+                button.disabled = !v;
+            }
+
+            function able() {
+                const c11 = document.getElementById("c1");
+                const c22 = document.getElementById("c2");
+                c11.style.display = "none";
+                c22.style.display = "none";
+                const button = document.getElementById("btn");
+                button.disabled = false;
+
+            }
+
+
+
+
+            function validatea() {
+                var password = document.getElementById("passworda").value;
+                var confirmpassword = document.getElementById("confirmpassworda").value;
+
+                const button = document.getElementById("btna");
+
+
+                const c1 = document.getElementById("c1a");
+                const c2 = document.getElementById("c2a");
+
+
+
+
+
+
+
+                var v = password === confirmpassword;
+                if (!v) {
+
+                    c1.style.display = "block";
+                    c2.style.display = "block";
+                }
+                button.disabled = !v;
+            }
+
+            function ablea() {
+                const c11 = document.getElementById("c1a");
+                const c22 = document.getElementById("c2a");
+                c11.style.display = "none";
+                c22.style.display = "none";
+                const button = document.getElementById("btna");
+                button.disabled = false;
+
+            }
+
+
+
+
+        </script>
+
+
+
+
+
+
+
+    }

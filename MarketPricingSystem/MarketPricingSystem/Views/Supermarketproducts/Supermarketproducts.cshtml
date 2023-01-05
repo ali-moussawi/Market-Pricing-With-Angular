@@ -1,0 +1,277 @@
+﻿@model  MarketPricingSystem.ViewModel.marketidwithproducts
+@{
+    ViewBag.Title = "Supermarketproducts";
+    Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
+}
+@{
+
+    var cookie = Request.Cookies["Permissions"];
+
+    MarketPricingSystem.security.EncryptandDecrypt ed = new MarketPricingSystem.security.EncryptandDecrypt();
+    var value = ed.DecryptPassword(cookie.Value);
+
+
+}
+<main class="English">
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Products</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/Supermarketproducts/Allsupermarkets">Supermarkets</a></li>
+            <li class="breadcrumb-item active">products</li>
+        </ol>
+        @if (value.Contains("insertproducts"))
+        {
+            <div style="margin-bottom:10px">
+
+                <a href="/Supermarketproducts/Createproduct/@Model.marketid" class="btn btn-success" role="button">Add New product </a>
+            </div>
+        }
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                All Products
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Barcode</th>
+                            <th>Description</th>
+                            <th>price</th>
+                            <th>category</th>
+                            @if (value.Contains("updateproductprice") || value.Contains("deleteproductpriced"))
+                            {
+                                <th></th>
+                            }
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Name</th>
+                            <th>Barcode</th>
+                            <th>Description</th>
+                            <th>price</th>
+                            <th>category</th>
+                            @if (value.Contains("updateproductprice") || value.Contains("deleteproductpriced"))
+                            {
+                                <th></th>
+                            }
+                        </tr>
+                    </tfoot>
+
+                    <tbody>
+                        @foreach (var market in Model.supermarketproducts)
+                        {
+
+                            <tr>
+                                <td>@market.productname</td>
+                                <td>@market.productBarcode</td>
+                                <td>@market.productDescription</td>
+                                <td>@market.productprice<span style="margin-left:10px">LB</span></td>
+                                <td>@market.productcategory</td>
+
+                                @if (value.Contains("updateproductprice") || value.Contains("deleteproductpriced"))
+                                {
+                                    <th>
+                                        @if (value.Contains("updateproductprice"))
+                                        {
+
+                                            @Html.ActionLink("Update", "Updateproductprice", "Supermarketproducts", new { marketid = @Model.marketid, productid = @market.productid }, new { @class = "btn btn-primary", @style = "color:white;" })
+                                        }
+                                        @if (value.Contains("deleteproductpriced"))
+                                        {
+                                            <button type="button" class="btn btn-danger   js-delete" onclick="confirm(this)" mid-data1="@Model.marketid" middata2=" @market.productid">
+                                                Delete
+                                            </button>
+                                        }
+                                    </th>
+                                }
+
+                            </tr>
+                        }
+                    </tbody>
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+<main class="Arabic">
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">البضائع</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/Supermarketproducts/Allsupermarkets">المتاجر</a></li>
+            <li class="breadcrumb-item active">البضائع</li>
+        </ol>
+        @if (value.Contains("insertproducts"))
+        {
+            <div style="margin-bottom:10px">
+
+                <a href="/Supermarketproducts/Createproduct/@Model.marketid" class="btn btn-success" role="button">اضافه منتج جديد </a>
+            </div>
+        }
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                جميع البضائع
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimplea">
+                    <thead>
+                        <tr>
+                            <th>الاسم</th>
+                            <th>الرمز الشريطي</th>
+                            <th>الوصف</th>
+                            <th>السعر</th>
+                            <th>الصنف</th>
+                            @if (value.Contains("updateproductprice") || value.Contains("deleteproductpriced"))
+                            {
+                                <th></th>
+                            }
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>الاسم</th>
+                            <th>الرمز الشريطي</th>
+                            <th>الوصف</th>
+                            <th>السعر</th>
+                            <th>الصنف</th>
+                            @if (value.Contains("updateproductprice") || value.Contains("deleteproductpriced"))
+                            {
+                                <th></th>
+                            }
+                        </tr>
+                    </tfoot>
+
+                    <tbody>
+                        @foreach (var market in Model.supermarketproducts)
+                        {
+
+                            <tr>
+                                <td>@market.productname</td>
+                                <td>@market.productBarcode</td>
+                                <td>@market.productDescription</td>
+                                <td>@market.productprice<span style="margin-left:10px">LB</span></td>
+                                <td>@market.productcategory</td>
+
+                                @if (value.Contains("updateproductprice") || value.Contains("deleteproductpriced"))
+                                {
+                                    <th>
+                                        @if (value.Contains("updateproductprice"))
+                                        {
+
+                                            @Html.ActionLink("تحديث السعر", "Updateproductprice", "Supermarketproducts", new { marketid = @Model.marketid, productid = @market.productid }, new { @class = "btn btn-primary", @style = "color:white;" })
+                                        }
+                                        @if (value.Contains("deleteproductpriced"))
+                                        {
+                                            <button type="button" class="btn btn-danger   js-delete" onclick="confirm(this)" mid-data1="@Model.marketid" middata2=" @market.productid">
+                                                ازاله
+                                            </button>
+                                        }
+                                    </th>
+                                }
+
+                            </tr>
+                        }
+                    </tbody>
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+@section scripts {
+
+    <script src="~/Scripts/sweetalert2@11.js"></script>
+
+    <script>
+        function confirm(event) {
+            var btn = event;
+            let value1 = btn.getAttribute("mid-data1");
+            let value2 = btn.getAttribute("middata2");
+            let lang = localStorage.getItem("lang");
+
+            if (lang == "English") {
+
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "/Supermarketproducts/ConfirmDelete?marketid=" + value1 + "&productid=" + value2,
+                            method: "get",
+                            success: function () {
+                                $(btn).closest('tr').fadeOut();
+                            }
+                        })
+
+
+
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                    }
+                })
+            }
+
+
+            if (lang == "Arabic") {
+                Swal.fire({
+                    title: 'هل انت متاكد?',
+                    text: "!لن تتمكن من استرجاع البينات",
+                    icon: 'warning',
+
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '!نعم انا متاكد',
+                    cancelButtonText: "الغاء",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "/Supermarketproducts/ConfirmDelete?marketid=" + value1 + "&productid=" + value2,
+                            method: "get",
+                            success: function () {
+                                $(btn).closest('tr').fadeOut();
+                            }
+                        })
+
+
+
+                        Swal.fire(
+                            'تم!',
+                            'تم ازاله هذه المعلومات',
+                            'success'
+                        )
+                    }
+                })
+            }
+        }
+
+
+
+
+    </script>
+
+}

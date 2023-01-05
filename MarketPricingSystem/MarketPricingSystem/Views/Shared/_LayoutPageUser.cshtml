@@ -1,0 +1,418 @@
+﻿@{ 
+
+    var cookie = Request.Cookies["Permissions"];
+
+    MarketPricingSystem.security.EncryptandDecrypt ed = new MarketPricingSystem.security.EncryptandDecrypt();
+        var value =  ed.DecryptPassword(cookie.Value);
+    
+
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="icon" type="image/svg" href="~/Images/icon.svg" sizes="32x32">
+
+    <title>Dashboard</title>
+    <link href="~/Content/Dtablestyle.css" rel="stylesheet" />
+    <link href="~/Content/user.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    
+    @RenderSection("Styles", false)
+
+    <style>
+        .Arabic {
+            display: none;
+        }
+
+        .English {
+            display: none;
+        }
+
+
+       
+            
+
+    </style>
+
+
+</head>
+
+
+<body class="sb-nav-fixed">
+    
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- Navbar Brand-->
+        <a class="English navbar-brand ps-3" href="/Users/Dashboard">Shop Savvy</a>
+        <a class="Arabic navbar-brand ps-3" href="/Users/Dashboard">Shop Savvy</a>
+        <!-- Sidebar Toggle-->
+
+
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+        <!-- Navbar Search-->
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+        </form>
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li class="nav-item dropdown">
+               
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li>
+                        <a class="English dropdown-item" href="/Users/Settings">Profile settings</a>
+                        <a class="Arabic dropdown-item" href="/Users/Settings">اعدادات الحساب</a>
+
+                    </li>
+
+                    <li><hr class="dropdown-divider" /></li>
+                    <li>
+                        <a class="English dropdown-item" href="/Account/Signout">Logout</a>
+                        <a class="Arabic dropdown-item" href="/Account/Signout">تسجيل خروج</a>
+                    </li>
+
+
+                    <li>
+                        <a class="English dropdown-item" style="cursor:pointer" onclick="changelang()">change language to ar </a>
+                        <a class="Arabic dropdown-item" style="cursor:pointer" onclick="changelang()">en تغيير اللغه الى</a>
+
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+
+    <div id="layoutSidenav">
+        <div class="English">
+
+
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+
+
+
+
+                        <div class="nav">
+
+
+
+                            <div class="sb-sidenav-menu-heading">basic</div>
+
+                            <a class=" nav-link" href="/Users/Dashboard">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Dashboard
+                            </a>
+
+
+
+                            <div class="sb-sidenav-menu-heading">Settings</div>
+
+
+                            @if (value.Contains("viewsupermarket"))
+                            {
+                                <a class=" nav-link" href="/Supermarket/Allsupermarkets">
+                                    <div class=" sb-nav-link-icon"> <i class="fa-solid fa-cart-shopping"></i></div>
+                                    Super Markets
+                                </a>
+                            }
+
+
+
+                            @if (value.Contains("viewproduct"))
+                            {
+
+                                <a class=" nav-link" href="/Products/AllProducts">
+                                    <div class=" sb-nav-link-icon"><i class="fa-brands fa-product-hunt"></i></div>
+                                    Products
+                                </a>
+
+                            }
+
+
+
+                            @if (value.Contains("viewcategory"))
+                            {
+                                <a class=" nav-link" href="/Category/AllCategories">
+                                    <div class=" sb-nav-link-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                                    Categories
+                                </a>
+                            }
+                            @if (value.Contains("viewsp"))
+                            {
+                                <a class=" nav-link" href="/Supermarketproducts/Allsupermarkets">
+                                    <div class=" sb-nav-link-icon"><i class="fa-solid fa-money-bill-trend-up"></i> </div>
+                                    Super Market Products
+                                </a>
+                            }
+                            @if (value.Contains("viewroles"))
+                            {
+                                <a class=" nav-link" href="/Roles/AllRoles">
+                                    <div class=" sb-nav-link-icon"><i class="fa-sharp fa-solid fa-lock"></i></div>
+                                    Roles
+                                </a>
+                            }
+
+
+                            @if (value.Contains("viewpermissions"))
+                            {
+                                <a class=" nav-link" href="/Permission/Allpermissions">
+                                    <div class=" sb-nav-link-icon"><i class="fa-sharp fa-solid fa-door-open"></i></div>
+                                    Permissions
+                                </a>
+                            }
+                            @if (value.Contains("viewusers"))
+                            {
+                                <a class=" nav-link" href="/Others/Allusers">
+                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
+                                    Users
+                                </a>
+                            }
+
+
+                        </div>
+
+
+
+
+                    </div>
+
+
+                    <div class=" sb-sidenav-footer">
+                        <div class=" small">Logged in as:</div>
+                        @User.Identity.Name.Split(',').First()
+                    </div>
+
+
+
+
+
+
+
+
+
+                </nav>
+            </div>
+        </div>
+
+        <div class="Arabic">
+
+
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+
+
+
+
+                        <div class="nav">
+
+
+
+                            <div class="sb-sidenav-menu-heading">اساسي</div>
+
+                            <a class=" nav-link" href="/Users/Dashboard">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                الصفحه الرئيسيه
+                            </a>
+
+
+
+                            <div class="sb-sidenav-menu-heading">الاعدادات</div>
+
+
+                            @if (value.Contains("viewsupermarket"))
+                            {
+                                <a class=" nav-link" href="/Supermarket/Allsupermarkets">
+                                    <div class=" sb-nav-link-icon"> <i class="fa-solid fa-cart-shopping"></i></div>
+                                   المتجر
+                                </a>
+                            }
+
+
+
+                            @if (value.Contains("viewproduct"))
+                            {
+
+                                <a class=" nav-link" href="/Products/AllProducts">
+                                    <div class=" sb-nav-link-icon"><i class="fa-brands fa-product-hunt"></i></div>
+                                    البضائع
+                                </a>
+
+                            }
+
+
+
+                            @if (value.Contains("viewcategory"))
+                            {
+                                <a class=" nav-link" href="/Category/AllCategories">
+                                    <div class=" sb-nav-link-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                                    الاصناف
+                                </a>
+                            }
+                            @if (value.Contains("viewsp"))
+                            {
+                                <a class=" nav-link" href="/Supermarketproducts/Allsupermarkets">
+                                    <div class=" sb-nav-link-icon"><i class="fa-solid fa-money-bill-trend-up"></i> </div>
+                                    بضائع المتاجر
+                                </a>
+                            }
+                            @if (value.Contains("viewroles"))
+                            {
+                                <a class=" nav-link" href="/Roles/AllRoles">
+                                    <div class=" sb-nav-link-icon"><i class="fa-sharp fa-solid fa-lock"></i></div>
+                                    الادوار
+                                </a>
+                            }
+
+
+                            @if (value.Contains("viewpermissions"))
+                            {
+                                <a class=" nav-link" href="/Permission/Allpermissions">
+                                    <div class=" sb-nav-link-icon"><i class="fa-sharp fa-solid fa-door-open"></i></div>
+                                    الاذونات
+                                </a>
+                            }
+                            @if (value.Contains("viewusers"))
+                            {
+                                <a class=" nav-link" href="/Others/Allusers">
+                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
+                                    المستخدمين
+                                </a>
+                            }
+
+
+                        </div>
+
+
+
+
+                    </div>
+
+
+                    <div class=" sb-sidenav-footer">
+                        <div class=" small">:تم تسجيل الدخول من </div>
+                        @User.Identity.Name.Split(',').First()
+                    </div>
+
+
+
+
+
+
+
+
+
+                </nav>
+            </div>
+        </div>
+        <div id="layoutSidenav_content">
+
+
+            @RenderBody()
+
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; Market Pricing 2022-2023</div>
+
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <script src="~/Scripts/userlayoutbootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="~/Scripts//usersdatatables.js"></script>
+    <script src="~/Scripts/simple-datatables@latest.js" crossorigin="anonymous"></script>
+
+
+
+    <script src="~/Scripts/users.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+
+
+
+    <script>
+
+
+       
+        let lang = localStorage.getItem("lang");
+      
+        if (lang == null) {
+
+            localStorage.setItem("lang", "English");
+
+        }
+
+        if (lang == "Arabic") {
+
+            let Arabicelements = document.getElementsByClassName("Arabic");
+
+            for (const Arabicelement of Arabicelements) {
+                Arabicelement.style.display = "block";
+            }
+            let EnglishElements = document.getElementsByClassName("English");
+
+            for (const Englishitem of EnglishElements) {
+                Englishitem.style.display = "none";
+
+            }
+        }
+
+        if (lang == "English") {
+
+            let EnglishElements = document.getElementsByClassName("English");
+
+            for (const Englishitem of EnglishElements) {
+                Englishitem.style.display = "block";
+            }
+
+            let Arabicelements = document.getElementsByClassName("Arabic");
+
+            for (const Arabicelement of Arabicelements) {
+                Arabicelement.style.display = "none";
+            }
+
+        }
+
+
+        function changelang() {
+
+
+            let lang = localStorage.getItem("lang");
+
+
+
+
+            if (lang == "English") {
+                localStorage.setItem("lang", "Arabic");
+            }
+
+            if (lang == "Arabic") {
+                localStorage.setItem("lang", "English");
+            }
+
+            location.reload();
+
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

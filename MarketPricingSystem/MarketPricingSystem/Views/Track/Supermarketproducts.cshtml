@@ -1,0 +1,164 @@
+﻿@model  MarketPricingSystem.ViewModel.marketidwithproducts
+@{
+    ViewBag.Title = "Supermarketproducts";
+    Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
+}
+
+<main class="English">
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Products</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/Supermarketproducts/Allsupermarkets">Supermarkets</a></li>
+            <li class="breadcrumb-item active">products</li>
+        </ol>
+     
+        
+        
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                All Products
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Barcode</th>
+                            <th>Description</th>
+                         
+                            <th>category</th>
+                           
+                                <th></th>
+                            
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Name</th>
+                            <th>Barcode</th>
+                            <th>Description</th>
+                          
+                            <th>category</th>
+                         
+                                <th></th>
+                            
+                        </tr>
+                    </tfoot>
+
+                    <tbody>
+                        @foreach (var market in Model.supermarketproducts)
+                        {
+
+                            <tr>
+                                <td>@market.productname</td>
+                                <td>@market.productBarcode</td>
+                                <td>@market.productDescription</td>
+                            
+                                <td>@market.productcategory</td>
+
+                             
+                                    <th>
+                                     
+
+                                            @Html.ActionLink("Track", "Graph", "Track", new { marketid = @Model.marketid, productid = @market.productid }, new { @class = "btn btn-primary", @style = "color:white;" })
+                                       
+                                       
+                                        
+                                        
+                                    </th>
+                                
+
+                            </tr>
+                        }
+                    </tbody>
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+<main class="Arabic">
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">البضائع</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/Supermarketproducts/Allsupermarkets">المتاجر</a></li>
+            <li class="breadcrumb-item active">البضائع</li>
+        </ol>
+    
+        
+        
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                جميع البضائع
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimplea">
+                    <thead>
+                        <tr>
+                            <th>الاسم</th>
+                            <th>الرمز الشريطي</th>
+                            <th>الوصف</th>
+                      
+                            <th>الصنف</th>
+                         
+                                <th></th>
+                            
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>الاسم</th>
+                            <th>الرمز الشريطي</th>
+                            <th>الوصف</th>
+                       
+                            <th>الصنف</th>
+                         
+                                <th></th>
+                            
+                        </tr>
+                    </tfoot>
+
+                    <tbody>
+                        @foreach (var market in Model.supermarketproducts)
+                        {
+
+                            <tr>
+                                <td>@market.productname</td>
+                                <td>@market.productBarcode</td>
+                                <td>@market.productDescription</td>
+                               
+                                <td>@market.productcategory</td>
+
+                               
+                                    <th>
+                                       
+
+                                            @Html.ActionLink("تتبع", "Graph", "Track", new { marketid = @Model.marketid, productid = @market.productid }, new { @class = "btn btn-primary", @style = "color:white;" })
+                                        
+                                      
+                                          
+                                        
+                                    </th>
+                                
+
+                            </tr>
+                        }
+                    </tbody>
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+

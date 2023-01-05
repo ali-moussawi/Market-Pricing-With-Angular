@@ -1,0 +1,111 @@
+﻿@model  IEnumerable<MarketPricingSystem.ViewModel.productdetails>
+    ViewBag.Title = "ProductList";
+}
+<
+<div style="height:100px"> <span></span></div>
+
+
+<div class="English">
+    <table id="example" class="table table-striped table-bordered" style="width:100% ;">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Barcode</th>
+                <th>Description</th>
+                <th>price</th>
+                <th>category</th>
+
+
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var market in Model)
+            {
+
+                <tr>
+                    <td>@market.productname</td>
+                    <td>@market.productBarcode</td>
+                    <td>@market.productDescription</td>
+                    <td>@market.productprice <span style="margin-left:10px">LB</span></td>
+                    <td>@market.productcategory</td>
+
+
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+
+<div class="Arabic">
+    <table id="examplea" class="table table-striped table-bordered" style="width:100% ;">
+        <thead>
+            <tr>
+                <th>الاسم</th>
+                <th>الرمز</th>
+                <th>الوصف</th>
+                <th>السعر</th>
+                <th>الصنف</th>
+
+
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var market in Model)
+            {
+
+                <tr>
+                    <td>@market.productname</td>
+                    <td>@market.productBarcode</td>
+                    <td>@market.productDescription</td>
+                    <td>@market.productprice <span style="margin-left:10px">ل.ل</span></td>
+                    <td>@market.productcategory</td>
+
+
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div style="margin-bottom:200px">
+    <span></span>
+</div>
+
+
+@section Styles {
+
+    <link href="~/Content/HomedataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/homedatatables.css" rel="stylesheet" type="text/css" />
+}
+
+@section scripts
+{
+    <script src="~/Scripts/Homejquery-3.5.1.js"></script>
+    <script src="~/Scripts/Homejquery.dataTables.min.js"></script>
+    <script src="~/Scripts/HomedataTables.bootstrap4.min.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+        $(document).ready(function () {
+            $('#examplea').DataTable();
+        });
+
+
+    </script>
+
+
+
+}

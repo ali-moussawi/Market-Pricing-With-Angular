@@ -1,0 +1,266 @@
+﻿<!DOCTYPE html>
+<html>
+
+
+
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/svg" href="~/Images/icon.svg" sizes="32x32">
+
+        <title>@ViewBag.Title</title>
+
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+        @RenderSection("Styles", false)
+
+        <script src="https://kit.fontawesome.com/c48ab5a612.js" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="~/Content/style.css">
+
+
+        <style>
+            .Arabic {
+
+                display: none;
+
+            }
+
+            .English {
+                display: none;
+            }
+
+            .switch {
+                position: relative;
+                display: inline-block;
+                margin: 0 5px;
+            }
+
+                .switch > span {
+                    position: absolute;
+                    top: 14px;
+                    pointer-events: none;
+                    font-family: 'Helvetica', Arial, sans-serif;
+                    font-weight: bold;
+                    font-size: 12px;
+                    text-transform: uppercase;
+                    text-shadow: 0 1px 0 rgba(0, 0, 0, .06);
+                    width: 50%;
+                    text-align: center;
+                }
+
+            input.check-toggle-round-flat:checked ~ .off {
+                color: #F36F25;
+            }
+
+            input.check-toggle-round-flat:checked ~ .on {
+                color: #fff;
+            }
+
+            .switch > span.on {
+                left: 0;
+                padding-left: 2px;
+                color: #F36F25;
+            }
+
+            .switch > span.off {
+                right: 0;
+                padding-right: 4px;
+                color: #fff;
+            }
+
+            .check-toggle {
+                position: absolute;
+                margin-left: -9999px;
+                visibility: hidden;
+            }
+
+                .check-toggle + label {
+                    display: block;
+                    position: relative;
+                    cursor: pointer;
+                    outline: none;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                }
+
+            input.check-toggle-round-flat + label {
+                padding: 2px;
+                width: 97px;
+                height: 35px;
+                background-color: #F36F25;
+                -webkit-border-radius: 60px;
+                -moz-border-radius: 60px;
+                border-radius: 60px;
+            }
+
+                input.check-toggle-round-flat + label:before, input.check-toggle-round-flat + label:after {
+                    display: block;
+                    position: absolute;
+                    content: "";
+                }
+
+                input.check-toggle-round-flat + label:before {
+                    top: 2px;
+                    left: 2px;
+                    bottom: 2px;
+                    right: 2px;
+                    background-color: #F36F25;
+                    border-radius: 60px;
+                }
+
+                input.check-toggle-round-flat + label:after {
+                    top: 4px;
+                    left: 4px;
+                    bottom: 4px;
+                    width: 48px;
+                    background-color: #fff;
+                    -webkit-border-radius: 52px;
+                    -moz-border-radius: 52px;
+                    border-radius: 52px;
+                    -webkit-transition: margin 0.2s;
+                    -moz-transition: margin 0.2s;
+                    -o-transition: margin 0.2s;
+                    transition: margin 0.2s;
+                }
+
+            input.check-toggle-round-flat:checked + label {
+            }
+
+                input.check-toggle-round-flat:checked + label:after {
+                    margin-left: 44px;
+                }
+ 
+        </style>
+
+</head>
+
+
+
+
+<body style="padding-bottom:0px">
+
+    @Html.Partial("_NavBar")
+
+    @RenderBody()
+
+    @Html.Partial("_Footer")
+
+
+
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/script.js")
+
+    @RenderSection("scripts", required: false)
+
+
+
+    <script>
+
+
+        let lang = localStorage.getItem("lang");
+
+        if (lang == null) {
+
+            localStorage.setItem("lang", "English");
+
+        }
+
+        if (lang == "Arabic") {
+
+            let Arabicelements = document.getElementsByClassName("Arabic");
+
+            for (const Arabicelement of Arabicelements) {
+                Arabicelement.style.display = "block";
+            }
+            let EnglishElements = document.getElementsByClassName("English");
+
+            for (const Englishitem of EnglishElements) {
+                Englishitem.style.display = "none";
+
+            }
+        }
+
+        if (lang == "English") {
+
+            let EnglishElements = document.getElementsByClassName("English");
+
+            for (const Englishitem of EnglishElements) {
+                Englishitem.style.display = "block";
+            }
+
+            let Arabicelements = document.getElementsByClassName("Arabic");
+
+            for (const Arabicelement of Arabicelements) {
+                Arabicelement.style.display = "none";
+            }
+
+        }
+
+
+
+
+        function toggle() {
+
+            if (lang == "English") {
+
+                localStorage.setItem("lang", "Arabic");
+            }
+
+            if (lang == "Arabic") {
+                localStorage.setItem("lang", "English");
+            }
+
+            
+          
+
+            setTimeout(function () { location.reload(); }, 100);
+
+        }
+
+
+
+        //toggle button on of lang
+        var eng = document.getElementById("eng");
+        var arb = document.getElementById("arb");
+
+        if (lang == "Arabic") {
+
+            arb.classList.add("on");
+            arb.classList.remove("off");
+
+
+            eng.classList.add("off");
+            eng.classList.remove("on");
+
+
+        }
+        if (lang == "English") {
+
+            eng.classList.add("on");
+            eng.classList.remove("off");
+
+
+            arb.classList.add("off");
+            arb.classList.remove("on");
+
+
+
+
+
+        }
+
+
+
+
+
+
+    </script>
+</body>
+</html>

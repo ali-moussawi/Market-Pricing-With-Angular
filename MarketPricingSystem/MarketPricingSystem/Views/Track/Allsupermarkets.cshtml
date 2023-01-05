@@ -1,0 +1,145 @@
+﻿
+@model IEnumerable<MarketPricingSystem.Models.supermarket>
+
+@{
+    ViewBag.Title = "Allsupermarkets";
+    Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
+}
+
+
+
+<main class="English">
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Super Markets</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/Users/Dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item active">supermarkets</li>
+        </ol>
+        <div style="margin-bottom:10px">
+
+            <span></span>
+        </div>
+
+        <h4 style="color:green"> please choose the supermarket you want to track :</h4>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                All SuperMarkets
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>Market Name</th>
+                          
+                           
+                                <th></th>
+                            
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Market Name</th>
+                         
+                         
+                                <th></th>
+                            
+
+
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var market in Model)
+                        {
+
+                            <tr>
+                                <td>@market.supermarketName</td>
+                             
+
+                               
+                                    <td>
+
+                                        <a href="/Track/Supermarketproducts/@market.supermarketId" class="btn btn-success" role="button">Products</a>
+
+                                    </td>
+                                
+
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+<main class="Arabic">
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">المتاجر</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/Users/Dashboard">الصفحه الرئيسيه</a></li>
+            <li class="breadcrumb-item active">المتاجر</li>
+        </ol>
+        <div style="margin-bottom:10px">
+
+            <span></span>
+        </div>
+        <h4 style="color:green">:اختر المتجر الذي تريد تتبعه</h4>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                All SuperMarkets
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimplea">
+                    <thead>
+                        <tr>
+                            <th>اسم المتجر</th>
+
+
+                            <th></th>
+
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>اسم المتجر</th>
+
+
+                            <th></th>
+
+
+
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var market in Model)
+                        {
+
+                            <tr>
+                                <td>@market.supermarketName</td>
+
+
+                                <td>
+
+                                    <a href="/Track/Supermarketproducts/@market.supermarketId" class="btn btn-success" role="button">البضائع</a>
+
+                                </td>
+
+
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>

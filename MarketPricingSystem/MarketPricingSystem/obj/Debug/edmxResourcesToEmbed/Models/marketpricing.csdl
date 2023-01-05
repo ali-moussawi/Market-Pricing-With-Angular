@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="marketpricingContext" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="categoryId" />
+    </Key>
+    <Property Name="categoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="categoryName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="products" Relationship="Self.products_ctgr" FromRole="categories" ToRole="products" />
+  </EntityType>
+  <EntityType Name="permission">
+    <Key>
+      <PropertyRef Name="PermissionId" />
+    </Key>
+    <Property Name="PermissionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PermissionName" Type="String" MaxLength="45" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="rolepermissions" Relationship="Self.rolepermissions_forg2" FromRole="permissions" ToRole="rolepermissions" />
+  </EntityType>
+  <EntityType Name="productprice">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="productId" Type="Int32" Nullable="false" />
+    <Property Name="supermarketid" Type="Int32" Nullable="false" />
+    <Property Name="price" Type="Int32" Nullable="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="IsActivePrice" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="product" Relationship="Self.productprices_prid" FromRole="productprices" ToRole="products" />
+    <NavigationProperty Name="supermarket" Relationship="Self.productprices_spid" FromRole="productprices" ToRole="supermarket" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="productId" />
+    </Key>
+    <Property Name="productId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="productName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BarcodeNb" Type="Int32" Nullable="false" />
+    <Property Name="productDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="categoryId" Type="Int32" />
+    <NavigationProperty Name="category" Relationship="Self.products_ctgr" FromRole="products" ToRole="categories" />
+    <NavigationProperty Name="productprices" Relationship="Self.productprices_prid" FromRole="products" ToRole="productprices" />
+  </EntityType>
+  <EntityType Name="rolepermission">
+    <Key>
+      <PropertyRef Name="RoleId" />
+      <PropertyRef Name="PermissionId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="PermissionId" Type="Int32" Nullable="false" />
+    <Property Name="nothing" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="permission" Relationship="Self.rolepermissions_forg2" FromRole="rolepermissions" ToRole="permissions" />
+    <NavigationProperty Name="role" Relationship="Self.rolepermissions_forg1" FromRole="rolepermissions" ToRole="roles" />
+  </EntityType>
+  <EntityType Name="role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="rolepermissions" Relationship="Self.rolepermissions_forg1" FromRole="roles" ToRole="rolepermissions" />
+    <NavigationProperty Name="users" Relationship="Self.users_frg123roleid" FromRole="roles" ToRole="users" />
+  </EntityType>
+  <EntityType Name="supermarket">
+    <Key>
+      <PropertyRef Name="supermarketId" />
+    </Key>
+    <Property Name="supermarketId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="supermarketName" Type="String" MaxLength="45" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="supermarketRegion" Type="String" MaxLength="45" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="supermarketDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="phonenumber" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="productprices" Relationship="Self.productprices_spid" FromRole="supermarket" ToRole="productprices" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="55" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="phoneNumber" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+    <Property Name="gmail" Type="String" MaxLength="55" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="55" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="roleid" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="role" Relationship="Self.users_frg123roleid" FromRole="users" ToRole="roles" />
+  </EntityType>
+  <Association Name="products_ctgr">
+    <End Role="categories" Type="Self.category" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="products" Type="Self.product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categories">
+        <PropertyRef Name="categoryId" />
+      </Principal>
+      <Dependent Role="products">
+        <PropertyRef Name="categoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="rolepermissions_forg2">
+    <End Role="permissions" Type="Self.permission" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="rolepermissions" Type="Self.rolepermission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="permissions">
+        <PropertyRef Name="PermissionId" />
+      </Principal>
+      <Dependent Role="rolepermissions">
+        <PropertyRef Name="PermissionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="productprices_prid">
+    <End Role="products" Type="Self.product" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="productprices" Type="Self.productprice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="products">
+        <PropertyRef Name="productId" />
+      </Principal>
+      <Dependent Role="productprices">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="productprices_spid">
+    <End Role="supermarket" Type="Self.supermarket" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="productprices" Type="Self.productprice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="supermarket">
+        <PropertyRef Name="supermarketId" />
+      </Principal>
+      <Dependent Role="productprices">
+        <PropertyRef Name="supermarketid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="rolepermissions_forg1">
+    <End Role="roles" Type="Self.role" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="rolepermissions" Type="Self.rolepermission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="roles">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="rolepermissions">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="users_frg123roleid">
+    <End Role="roles" Type="Self.role" Multiplicity="1" />
+    <End Role="users" Type="Self.user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="roles">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="users">
+        <PropertyRef Name="roleid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="marketpricing" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="categories" EntityType="Self.category" />
+    <EntitySet Name="permissions" EntityType="Self.permission" />
+    <EntitySet Name="productprices" EntityType="Self.productprice" />
+    <EntitySet Name="products" EntityType="Self.product" />
+    <EntitySet Name="rolepermissions" EntityType="Self.rolepermission" />
+    <EntitySet Name="roles" EntityType="Self.role" />
+    <EntitySet Name="supermarkets" EntityType="Self.supermarket" />
+    <EntitySet Name="users" EntityType="Self.user" />
+    <AssociationSet Name="products_ctgr" Association="Self.products_ctgr">
+      <End Role="categories" EntitySet="categories" />
+      <End Role="products" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="rolepermissions_forg2" Association="Self.rolepermissions_forg2">
+      <End Role="permissions" EntitySet="permissions" />
+      <End Role="rolepermissions" EntitySet="rolepermissions" />
+    </AssociationSet>
+    <AssociationSet Name="productprices_prid" Association="Self.productprices_prid">
+      <End Role="products" EntitySet="products" />
+      <End Role="productprices" EntitySet="productprices" />
+    </AssociationSet>
+    <AssociationSet Name="productprices_spid" Association="Self.productprices_spid">
+      <End Role="supermarket" EntitySet="supermarkets" />
+      <End Role="productprices" EntitySet="productprices" />
+    </AssociationSet>
+    <AssociationSet Name="rolepermissions_forg1" Association="Self.rolepermissions_forg1">
+      <End Role="roles" EntitySet="roles" />
+      <End Role="rolepermissions" EntitySet="rolepermissions" />
+    </AssociationSet>
+    <AssociationSet Name="users_frg123roleid" Association="Self.users_frg123roleid">
+      <End Role="roles" EntitySet="roles" />
+      <End Role="users" EntitySet="users" />
+    </AssociationSet>
+    <FunctionImport Name="Allproducts_withid" ReturnType="Collection(marketpricingContext.Allproducts_withid_Result)" />
+    <FunctionImport Name="Allusers" ReturnType="Collection(marketpricingContext.Allusers_Result)" />
+    <FunctionImport Name="Get_Cheapestproduct" ReturnType="Collection(marketpricingContext.Get_Cheapestproduct_Result)">
+      <Parameter Name="productid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Get_Expensiveproduct" ReturnType="Collection(marketpricingContext.Get_Expensiveproduct_Result)">
+      <Parameter Name="productid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Marketproducts" ReturnType="Collection(marketpricingContext.Marketproducts_Result)">
+      <Parameter Name="marketid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Nocategoryid" ReturnType="Collection(Int32)" />
+    <FunctionImport Name="product" ReturnType="Collection(marketpricingContext.product_Result)">
+      <Parameter Name="productid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ProductList" ReturnType="Collection(marketpricingContext.ProductList_Result)" />
+    <FunctionImport Name="Rolepermission" ReturnType="Collection(String)">
+      <Parameter Name="roleid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="updatecategorystatus">
+      <Parameter Name="nocategoryid" Mode="In" Type="Int32" />
+      <Parameter Name="categoryid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="messages" EntityType="marketpricingContext.message" />
+  </EntityContainer>
+  <ComplexType Name="Allproducts_withid_Result">
+    <Property Type="Int32" Name="productId" Nullable="false" />
+    <Property Type="String" Name="productName" Nullable="false" MaxLength="255" />
+    <Property Type="Int32" Name="BarcodeNb" Nullable="false" />
+    <Property Type="String" Name="productDescription" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="categoryName" Nullable="false" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="Allusers_Result">
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="55" />
+    <Property Type="String" Name="phoneNumber" Nullable="true" MaxLength="45" />
+    <Property Type="String" Name="gmail" Nullable="false" MaxLength="55" />
+    <Property Type="String" Name="password" Nullable="false" MaxLength="55" />
+    <Property Type="String" Name="RoleName" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="Get_Cheapestproduct_Result">
+    <Property Type="String" Name="supermarketName" Nullable="false" MaxLength="45" />
+    <Property Type="String" Name="productName" Nullable="false" MaxLength="255" />
+    <Property Type="Int32" Name="price" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Get_Expensiveproduct_Result">
+    <Property Type="String" Name="supermarketName" Nullable="false" MaxLength="45" />
+    <Property Type="String" Name="productName" Nullable="false" MaxLength="255" />
+    <Property Type="Int32" Name="price" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Marketproducts_Result">
+    <Property Type="Int32" Name="productId" Nullable="false" />
+    <Property Type="String" Name="productName" Nullable="false" MaxLength="255" />
+    <Property Type="Int32" Name="BarcodeNb" Nullable="false" />
+    <Property Type="String" Name="productDescription" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="price" Nullable="false" />
+    <Property Type="String" Name="categoryName" Nullable="false" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="product_Result">
+    <Property Type="Int32" Name="Column1" Nullable="true" />
+    <Property Type="String" Name="productName" Nullable="false" MaxLength="255" />
+    <Property Type="Int32" Name="BarcodeNb" Nullable="false" />
+    <Property Type="String" Name="productDescription" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="categoryName" Nullable="false" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="ProductList_Result">
+    <Property Type="Int32" Name="productId" Nullable="false" />
+    <Property Type="String" Name="productName" Nullable="false" MaxLength="255" />
+    <Property Type="Int32" Name="BarcodeNb" Nullable="false" />
+    <Property Type="String" Name="productDescription" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="categoryName" Nullable="false" MaxLength="255" />
+  </ComplexType>
+  <EntityType Name="message">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="message1" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

@@ -1,0 +1,110 @@
+﻿@model  MarketPricingSystem.Models.user
+@{
+    ViewBag.Title = "signin";
+}
+
+<div style="margin-top:190px"><span></span> </div>
+
+
+<div style="margin-left:27%" class="English">
+
+
+    @using (Html.BeginForm("Validatesignin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>signin</h4>
+            <hr />
+            @Html.ValidationSummary()
+            <div class="form-group">
+                <label id="Email" class="col-md-2 control-label">Email</label>
+                <div class="col-md-10">
+
+                    <input type="email" class="form-control" id="Email" name="Gmail" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.password, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(m => m.password, new { @class = "form-control" })
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div>
+
+                    <button type="submit"  style="width:fit-content" class="btn btn-primary">login</button>
+                </div>
+            </div>
+        </div>
+
+    }
+
+</div>
+
+
+
+
+
+
+
+<div style="margin-left:27%" class="Arabic">
+
+
+    @using (Html.BeginForm("Validatesignin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal" >
+            <h4>تسجيل دخول</h4>
+            <hr />
+            @Html.ValidationSummary()
+        <div class="form-group" dir="rtl">
+
+            <div class="col-md-10">
+
+                <input type="email" class="form-control" id="Email" name="Gmail" />
+
+            </div>
+            <label id="Email" class="col-md-2 control-label">البريد الالكتروني</label>
+        </div>
+
+        <div class="form-group" dir="rtl">
+
+
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.password, new { @class = "form-control" })
+
+            </div>
+            <label class="col-md-2 control-label" for="Password">الرمز</label>
+        </div>
+
+            <div class="form-group">
+                <div>
+
+                    <button type="submit" style="width:fit-content" class="btn btn-primary">تسجيل دخول</button>
+                </div>
+            </div>
+        </div>
+
+    }
+
+</div>
+
+<div style="margin-top:240px"><span></span> </div>
+
+
+@section Styles {
+
+    <style>
+
+        .validation-summary-errors {
+            color: red;
+        }
+    </style>
+
+
+}

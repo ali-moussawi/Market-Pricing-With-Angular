@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewBag.Title = "Createsupermarket";
+    Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
+}
+
+
+<main class="English">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Add new SuperMarket</h3></div>
+                    <div class="card-body">
+
+
+                        <form method="post" action="/Supermarket/ConfirmCreate">
+                            <h6 style="color: red; margin-left: 24%; opacity: 0.5">@TempData["Message1"]  </h6>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3 mb-md-0">
+                                        <input class="form-control" id="supermarketname" type="text" name="MarketName" required />
+                                        <label for="supermarketname"> SuperMarket Name</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input class="form-control" id="supermarketRegion" type="text" name="MarketRegion" required />
+                                        <label for="supermarketRegion"> SuperMarket Region</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="supermarketDescription" type="text" name="MarketDescription" required />
+                                <label for="supermarketDescription"> SuperMarket Description</label>
+                            </div>
+
+
+                            <h6 style="color: red; opacity: 0.5">@TempData["Message2"]  </h6>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3 mb-md-0">
+                                        <input class="form-control" id="phonenumber" type="text" name="MarketNumber" required  pattern="[0-9]+"  oninvalid="this.setCustomValidity('Please enter just numbers')"oninput="this.setCustomValidity('')"  />
+                                        <label for="phonenumber">SuperMarket Phone Number</label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="mt-4 mb-0">
+                                <div class="d-grid"> <button type="submit" class="btn btn-primary"> Add</button> </div>
+                            </div>
+                        </form>
+
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+
+<main class="Arabic">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h3 class="text-center font-weight-light my-4"> اضافه متجر جديد</h3></div>
+                    <div class="card-body">
+
+
+                        <form method="post" action="/Supermarket/ConfirmCreate">
+                            <h6 style="color: red; margin-left: 24%; opacity: 0.5">@TempData["Message1"]  </h6>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3 mb-md-0">
+                                        <input class="form-control" id="supermarketname" type="text" name="MarketName" required />
+                                        <label for="supermarketname"> اسم المتجر</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input class="form-control" id="supermarketRegion" type="text" name="MarketRegion" required />
+                                        <label for="supermarketRegion"> المنطقه</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="supermarketDescription" type="text" name="MarketDescription" required />
+                                <label for="supermarketDescription">الوصف</label>
+                            </div>
+
+
+                            <h6 style="color: red; opacity: 0.5">@TempData["Message2"]  </h6>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3 mb-md-0">
+                                        <input class="form-control" id="phonenumber" type="text" name="MarketNumber" required  pattern="[0-9]+"  oninvalid="this.setCustomValidity('ادخل ارقام فقط')"oninput="this.setCustomValidity('')" />
+                                        <label for="phonenumber">رقم الهاتف</label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="mt-4 mb-0">
+                                <div class="d-grid"> <button type="submit" class="btn btn-primary"> اضافه</button> </div>
+                            </div>
+                        </form>
+
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+

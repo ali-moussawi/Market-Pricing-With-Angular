@@ -1,0 +1,166 @@
+﻿@model IEnumerable<MarketPricingSystem.Models.supermarket>
+@{
+    ViewBag.Title = "Allsupermarkets";
+    Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
+}
+
+@{
+
+    var cookie = Request.Cookies["Permissions"];
+
+    MarketPricingSystem.security.EncryptandDecrypt ed = new MarketPricingSystem.security.EncryptandDecrypt();
+    var value = ed.DecryptPassword(cookie.Value);
+
+
+}
+<main class="English">
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Super Markets</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/Users/Dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item active">supermarkets</li>
+        </ol>
+        <div style="margin-bottom:10px">
+
+            <span></span>
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                All SuperMarkets
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>Market Name</th>
+                            <th>Market Region</th>
+                            <th>Description</th>
+                            <th>phone number</th>
+                            @if (value.Contains("viewspp"))
+                            {
+                                <th></th>
+                            }
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Market Name</th>
+                            <th>Market Region</th>
+                            <th>Description</th>
+                            <th>phone number</th>
+                            @if (value.Contains("viewspp"))
+                            {
+                                <th></th>
+                            }
+
+
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var market in Model)
+                        {
+
+                            <tr>
+                                <td>@market.supermarketName</td>
+                                <td>@market.supermarketRegion</td>
+                                <td>@market.supermarketDescription</td>
+                                <td>@market.phonenumber</td>
+
+                                @if (value.Contains("viewspp"))
+                                {
+                                    <td>
+
+                                        <a href="/Supermarketproducts/Supermarketproducts/@market.supermarketId" class="btn btn-success" role="button">Products</a>
+
+                                    </td>
+                                }
+
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+<main class="Arabic">
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">المتاجر</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/Users/Dashboard">الصفحه الرئيسيه</a></li>
+            <li class="breadcrumb-item active">المتاجر</li>
+        </ol>
+        <div style="margin-bottom:10px">
+
+            <span></span>
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                All SuperMarkets
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimplea">
+                    <thead>
+                        <tr>
+                            <th>اسم المتجر</th>
+                            <th>المنطقه</th>
+                            <th>الوصف</th>
+                            <th>رقم الهاتف</th>
+                            @if (value.Contains("viewspp"))
+                            {
+                                <th></th>
+                            }
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>اسم المتجر</th>
+                            <th>المنطقه</th>
+                            <th>الوصف</th>
+                            <th>رقم الهاتف</th>
+                            @if (value.Contains("viewspp"))
+                            {
+                                <th></th>
+                            }
+
+
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var market in Model)
+                        {
+
+                            <tr>
+                                <td>@market.supermarketName</td>
+                                <td>@market.supermarketRegion</td>
+                                <td>@market.supermarketDescription</td>
+                                <td>@market.phonenumber</td>
+
+                                @if (value.Contains("viewspp"))
+                                {
+                                    <td>
+
+                                        <a href="/Supermarketproducts/Supermarketproducts/@market.supermarketId" class="btn btn-success" role="button">البضائع</a>
+
+                                    </td>
+                                }
+
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>

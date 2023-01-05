@@ -1,0 +1,273 @@
+﻿@model IEnumerable<MarketPricingSystem.Models.category>
+@{
+    ViewBag.Title = "Allsupermarkets";
+    Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
+}
+
+@{
+
+    var cookie = Request.Cookies["Permissions"];
+
+    MarketPricingSystem.security.EncryptandDecrypt ed = new MarketPricingSystem.security.EncryptandDecrypt();
+    var value = ed.DecryptPassword(cookie.Value);
+
+
+}
+
+<main class="English">
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">All Categories</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/Users/Dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item active">categories</li>
+        </ol>
+        @if (value.Contains("addcategory"))
+        {
+            <div style="margin-bottom:10px">
+
+                <a href="/Category/Createcategory" class="btn btn-success" role="button">Add New Category </a>
+            </div>
+        }
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                All Categories
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>Category Name</th>
+                            @if (value.Contains("updatecategory") || value.Contains("deletecategory"))
+                            {
+                                <th></th>
+                            }
+
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Category Name</th>
+
+                            @if (value.Contains("updatecategory") || value.Contains("deletecategory"))
+                            {
+                                <th></th>
+                            }
+
+
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var category in Model)
+                        {
+
+                            <tr class="js-row">
+                                <td>@category.categoryName</td>
+
+                                @if (value.Contains("updatecategory") || value.Contains("deletecategory"))
+                                {
+                                    <td>
+                                        @if (value.Contains("updatecategory"))
+                                        {
+
+
+                                            <a href="/Category/Updatecategory/@category.categoryId" class="btn btn-primary" role="button">Update</a>
+
+                                        }
+
+
+
+
+                                        @if (value.Contains("deletecategory"))
+                                        {
+                                            <button type="button" class="btn btn-danger   js-delete" onclick="confirm(this)" cid-data="@category.categoryId">
+                                                Delete
+                                            </button>
+
+                                        }
+
+                                    </td>
+                                }
+
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+
+<main class="Arabic">
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">جميع الاصناف</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/Users/Dashboard">الصفحه الرئيسيه</a></li>
+            <li class="breadcrumb-item active">الاصناف</li>
+        </ol>
+        @if (value.Contains("addcategory"))
+        {
+            <div style="margin-bottom:10px">
+
+                <a href="/Category/Createcategory" class="btn btn-success" role="button">اضافه صنف جديد </a>
+            </div>
+        }
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                All Categories
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimplea">
+                    <thead>
+                        <tr>
+                            <th>الاسم</th>
+                            @if (value.Contains("updatecategory") || value.Contains("deletecategory"))
+                            {
+                                <th></th>
+                            }
+
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>الاسم</th>
+
+                            @if (value.Contains("updatecategory") || value.Contains("deletecategory"))
+                            {
+                                <th></th>
+                            }
+
+
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var category in Model)
+                        {
+
+                            <tr class="js-row">
+                                <td>@category.categoryName</td>
+
+                                @if (value.Contains("updatecategory") || value.Contains("deletecategory"))
+                                {
+                                    <td>
+                                        @if (value.Contains("updatecategory"))
+                                        {
+
+
+                                            <a href="/Category/Updatecategory/@category.categoryId" class="btn btn-primary" role="button">تعديل</a>
+
+                                        }
+
+
+
+
+                                        @if (value.Contains("deletecategory"))
+                                        {
+                                            <button type="button" class="btn btn-danger   js-delete" onclick="confirm(this)" cid-data="@category.categoryId">
+                                                ازاله
+                                            </button>
+
+                                        }
+
+                                    </td>
+                                }
+
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+
+@section scripts {
+
+    <script src="~/Scripts/sweetalert2@11.js"></script>
+
+    <script>
+        function confirm(event) {
+            var btn = event;
+            let value = btn.getAttribute("cid-data");
+            let lang = localStorage.getItem("lang");
+            if (lang == "English") {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "/Category/ConfirmDelete/" + value,
+                            method: "get",
+                            success: function () {
+                                $(btn).closest('tr').fadeOut();
+                            }
+                        })
+
+
+
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                    }
+                })
+            }
+
+
+            if (lang == "Arabic") {
+                Swal.fire({
+                    title: 'هل انت متاكد?',
+                    text: "!لن تتمكن من استرجاع البينات",
+                    icon: 'warning',
+
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '!نعم انا متاكد',
+                    cancelButtonText: "الغاء",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "/Category/ConfirmDelete/" + value,
+                            method: "get",
+                            success: function () {
+                                $(btn).closest('tr').fadeOut();
+                            }
+                        })
+
+
+
+                        Swal.fire(
+                            'تم!',
+                            'تم ازاله هذه المعلومات',
+                            'success'
+                        )
+                    }
+                })
+            }
+        }
+
+    </script>
+
+}
+

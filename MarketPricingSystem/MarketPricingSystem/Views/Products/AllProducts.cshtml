@@ -1,0 +1,285 @@
+﻿@model IEnumerable<MarketPricingSystem.ViewModel.product>
+@{
+    ViewBag.Title = "Allsupermarkets";
+    Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
+}
+@{
+
+    var cookie = Request.Cookies["Permissions"];
+
+    MarketPricingSystem.security.EncryptandDecrypt ed = new MarketPricingSystem.security.EncryptandDecrypt();
+    var value = ed.DecryptPassword(cookie.Value);
+
+
+}
+
+
+<main class="English">
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Products</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/Users/Dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item active">products</li>
+        </ol>
+        @if (value.Contains("addproduct"))
+        {
+            <div style="margin-bottom:10px">
+
+                <a href="/Products/Createproduct" class="btn btn-success" role="button">Add New product </a>
+            </div>
+        }
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                All Products
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Bar code</th>
+                            <th>Product Description</th>
+                            <th>Category</th>
+                            @if (value.Contains("updateproduct") || value.Contains("deleteproduct"))
+                            {
+                                <th></th>
+                            }
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Bar code</th>
+                            <th>Product Description</th>
+                            <th>Category</th>
+                            @if (value.Contains("updateproduct") || value.Contains("deleteproduct"))
+                            {
+                                <th></th>
+                            }
+
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var product in Model)
+                        {
+
+                            <tr>
+                                <td>@product.productname</td>
+                                <td>@product.productBarcode</td>
+                                <td>@product.productDescription</td>
+                                <td>@product.productcategory</td>
+
+                                @if (value.Contains("updateproduct") || value.Contains("deleteproduct"))
+                                {
+                                    <td>
+                                        @if (value.Contains("updateproduct"))
+                                        {
+                                            <a href="/Products/Updateproduct/@product.productid" class="btn btn-primary" role="button">Update</a>
+
+                                        }
+                                        @if (value.Contains("deleteproduct"))
+                                        {
+                                            <button type="button" class="btn btn-danger   js-delete" onclick="confirm(this)" mid-data="@product.productid">
+                                                Delete
+                                            </button>
+                                        }
+                                    </td>
+                                }
+
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+
+
+<main class="Arabic">
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">البضائع</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/Users/Dashboard">الصفحه الرئيسيه</a></li>
+            <li class="breadcrumb-item active">جميع البضائع</li>
+        </ol>
+        @if (value.Contains("addproduct"))
+        {
+            <div style="margin-bottom:10px">
+
+                <a href="/Products/Createproduct" class="btn btn-success" role="button">اضافه منتج جديد </a>
+            </div>
+        }
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                جميع البضائع
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimplea">
+                    <thead>
+                        <tr>
+                            <th>اسم المنتج</th>
+                            <th>الرمز الشريطي</th>
+                            <th>وصف المنتج</th>
+                            <th>الصنف</th>
+                            @if (value.Contains("updateproduct") || value.Contains("deleteproduct"))
+                            {
+                                <th></th>
+                            }
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>اسم المنتج</th>
+                            <th>الرمز الشريطي</th>
+                            <th>وصف المنتج</th>
+                            <th>الصنف</th>
+                            @if (value.Contains("updateproduct") || value.Contains("deleteproduct"))
+                            {
+                                <th></th>
+                            }
+
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var product in Model)
+                        {
+
+                            <tr>
+                                <td>@product.productname</td>
+                                <td>@product.productBarcode</td>
+                                <td>@product.productDescription</td>
+                                <td>@product.productcategory</td>
+
+                                @if (value.Contains("updateproduct") || value.Contains("deleteproduct"))
+                                {
+                                    <td>
+                                        @if (value.Contains("updateproduct"))
+                                        {
+                                            <a href="/Products/Updateproduct/@product.productid" class="btn btn-primary" role="button">تعديل</a>
+
+                                        }
+                                        @if (value.Contains("deleteproduct"))
+                                        {
+                                            <button type="button" class="btn btn-danger   js-delete" onclick="confirm(this)" mid-data="@product.productid">
+                                                ازاله
+                                            </button>
+                                        }
+                                    </td>
+                                }
+
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@section scripts {
+
+    <script src="~/Scripts/sweetalert2@11.js"></script>
+
+    <script>
+        function confirm(event) {
+            var btn = event;
+            let value = btn.getAttribute("mid-data");
+            let lang = localStorage.getItem("lang");
+            if (lang == "English") {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "/Products/ConfirmDelete/" + value,
+                            method: "get",
+                            success: function () {
+                                $(btn).closest('tr').fadeOut();
+                            }
+                        })
+
+
+
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                    }
+                })
+            }
+
+
+            if (lang == "Arabic") {
+                Swal.fire({
+                    title: 'هل انت متاكد?',
+                    text: "!لن تتمكن من استرجاع البينات",
+                    icon: 'warning',
+
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '!نعم انا متاكد',
+                    cancelButtonText: "الغاء",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "/Products/ConfirmDelete/" + value,
+                            method: "get",
+                            success: function () {
+                                $(btn).closest('tr').fadeOut();
+                            }
+                        })
+
+
+
+                        Swal.fire(
+                            'تم!',
+                            'تم ازاله هذه المعلومات',
+                            'success'
+                        )
+                    }
+                })
+            }
+        }
+
+
+
+    </script>
+
+}
+

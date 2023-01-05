@@ -1,0 +1,165 @@
+﻿@model IEnumerable<MarketPricingSystem.Models.role>
+@{
+    ViewBag.Title = "Allsupermarkets";
+    Layout = "~/Views/Shared/_LayoutPageUser.cshtml";
+}
+@{
+
+    var cookie = Request.Cookies["Permissions"];
+
+    MarketPricingSystem.security.EncryptandDecrypt ed = new MarketPricingSystem.security.EncryptandDecrypt();
+    var value = ed.DecryptPassword(cookie.Value);
+
+
+}
+
+<main class="English">
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">All Roles</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/Users/Dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item active">roles</li>
+        </ol>
+        @if (value.Contains("createrole"))
+        {
+            <div style="margin-bottom:10px">
+
+                <a href="/Roles/Createrole" class="btn btn-success" role="button">Create New Role </a>
+            </div>
+        }
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                    All Roles
+                </div>
+                <div class="card-body">
+                    <table id="datatablesSimple">
+                        <thead>
+                            <tr>
+                                <th>Role Name</th>
+
+
+                                @if (value.Contains("updaterole"))
+                                {
+                                    <th></th>
+                                }
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Role Name</th>
+
+
+                                @if (value.Contains("updaterole"))
+                                {
+                                    <th></th>
+                                }
+
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @foreach (var market in Model)
+                            {
+
+                                <tr>
+                                    <td>@market.RoleName</td>
+
+
+                                    <td>
+
+
+                                        <a href="/Roles/Rolepermissions/@market.RoleId" class="btn btn-primary" role="button">permissions</a>
+
+                                        @if (value.Contains("updaterole"))
+                                        {
+                                            <a href="/Roles/Updaterole/@market.RoleId" class="btn btn-warning" role="button">Edit permissions</a>
+                                        }
+                                        </td>
+
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+</main>
+
+
+
+
+<main class="Arabic">
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">جميع الادوار</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/Users/Dashboard">الصفحه الرئيسيه</a></li>
+            <li class="breadcrumb-item active">الادوار</li>
+        </ol>
+        @if (value.Contains("createrole"))
+        {
+            <div style="margin-bottom:10px">
+
+                <a href="/Roles/Createrole" class="btn btn-success" role="button">اضافه دور جديد </a>
+            </div>
+        }
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                الادوار
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimplea">
+                    <thead>
+                        <tr>
+                            <th>الاسم</th>
+
+
+                            @if (value.Contains("updaterole"))
+                            {
+                                <th></th>
+                            }
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>الاسم</th>
+
+
+                            @if (value.Contains("updaterole"))
+                            {
+                                <th></th>
+                            }
+
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var market in Model)
+                        {
+
+                            <tr>
+                                <td>@market.RoleName</td>
+
+
+                                <td>
+
+
+                                    <a href="/Roles/Rolepermissions/@market.RoleId" class="btn btn-primary" role="button">الاذونات</a>
+
+                                    @if (value.Contains("updaterole"))
+                                    {
+                                        <a href="/Roles/Updaterole/@market.RoleId" class="btn btn-warning" role="button">تعديل الاذونات</a>
+                                    }
+                                </td>
+
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
